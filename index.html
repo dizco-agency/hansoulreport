@@ -58,7 +58,7 @@
   .month.open .chev{transform:rotate(180deg);color:var(--orange)}
 
   .weeks{max-height:0;overflow:hidden;transition:max-height .32s ease}
-  .month.open .weeks{max-height:680px}
+  .month.open .weeks{max-height:720px}
   .wk{display:flex;align-items:center;gap:14px;padding:16px 22px 16px 26px;border-top:1px solid var(--line);text-decoration:none;color:inherit}
   .wk.live:hover{background:#fbf6f0}
   .wdot{width:9px;height:9px;border-radius:50%;background:var(--orange);flex:none}
@@ -87,35 +87,9 @@
 
   <div class="sec">Daftar Bulan</div>
 
-  <div class="month open" id="m-agu">
-    <div class="mhead" onclick="tog('m-agu')">
-      <div class="cal"><b>08</b><i>Agu</i></div>
-      <div class="minfo">
-        <h3>Agustus 2026</h3>
-        <p>Laporan performa mingguan</p>
-        <div class="tags">
-          <span class="tag blue">Shopee · CPAS · Affiliate · TikTok</span>
-          <span class="tag orange">Payday 8.8 di Week 2</span>
-        </div>
-      </div>
-      <span class="pill">2 report siap</span>
-      <span class="chev">⌄</span>
-    </div>
-    <div class="weeks">
-      <a class="wk live" href="agustus/week2.html"><span class="wdot"></span><span class="wt">Week 2<span class="wsub">8–14 Agu · payday 8.8</span></span><span class="go">Buka report →</span></a>
-      <a class="wk live" href="agustus/week3.html"><span class="wdot"></span><span class="wt">Week 3<span class="wsub">15–21 Agu</span></span><span class="go">Buka report →</span></a>
-      <div class="wk off"><span class="wdot off"></span><span class="wt">Week 4<span class="wsub">22–31 Agu</span></span><span class="soonlab">Segera</span></div>
-    </div>
-  </div>
-
-  <div class="month soon" id="m-sep">
-    <div class="mhead">
-      <div class="cal gray"><b>09</b><i>Sep</i></div>
-      <div class="minfo"><h3>September 2026</h3><p>Menyusul — report minggu berikutnya</p></div>
-      <span class="pill soon">Segera</span>
-      <span class="chev" style="opacity:.3">⌄</span>
-    </div>
-  </div>
+  <!-- Bulan dirender otomatis oleh JS di bawah. Cukup upload file weekN.html-nya;
+       index ini bakal deteksi sendiri file mana yang ada dan aktifin tombolnya. -->
+  <div id="months"></div>
 
   <div class="foot">
     <span class="lk">HanSoul × DIZCO</span>
@@ -127,11 +101,142 @@
 </div>
 
 <script>
+  /* =========================================================================
+     KONFIG BULAN & WEEK
+     -------------------------------------------------------------------------
+     Cukup upload file report ke folder bulan (mis. agustus/week4.html).
+     Index otomatis ngecek file mana yang ada → aktifin tombol "Buka report".
+     Nambah bulan baru? tambahin 1 objek di array MONTHS di bawah.
+     ========================================================================= */
+  var MONTHS = [
+    { id:'m-agu', folder:'agustus', cal:'08', mon:'Agu', title:'Agustus 2026',
+      desc:'Laporan performa mingguan',
+      tags:[{c:'blue',t:'Shopee · CPAS · Affiliate · TikTok'},{c:'orange',t:'Payday 8.8 di Week 2'}],
+      weeks:[
+        {t:'Week 1', s:'1–7 Agu',            f:'week1.html'},
+        {t:'Week 2', s:'8–14 Agu · payday 8.8', f:'week2.html'},
+        {t:'Week 3', s:'15–21 Agu',          f:'week3.html'},
+        {t:'Week 4', s:'22–31 Agu',          f:'week4.html'}
+      ]},
+    { id:'m-sep', folder:'september', cal:'09', mon:'Sep', title:'September 2026',
+      desc:'Laporan performa mingguan',
+      tags:[{c:'blue',t:'Shopee · CPAS · Affiliate · TikTok'}],
+      weeks:[
+        {t:'Week 1', s:'1–7 Sep',   f:'week1.html'},
+        {t:'Week 2', s:'8–14 Sep',  f:'week2.html'},
+        {t:'Week 3', s:'15–21 Sep', f:'week3.html'},
+        {t:'Week 4', s:'22–30 Sep', f:'week4.html'}
+      ]},
+    { id:'m-okt', folder:'oktober', cal:'10', mon:'Okt', title:'Oktober 2026',
+      desc:'Laporan performa mingguan',
+      tags:[{c:'blue',t:'Shopee · CPAS · Affiliate · TikTok'}],
+      weeks:[
+        {t:'Week 1', s:'1–7 Okt',   f:'week1.html'},
+        {t:'Week 2', s:'8–14 Okt',  f:'week2.html'},
+        {t:'Week 3', s:'15–21 Okt', f:'week3.html'},
+        {t:'Week 4', s:'22–31 Okt', f:'week4.html'}
+      ]}
+  ];
+
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+  /* cek 1 file ada apa nggak via HEAD (GitHub Pages balikin 200/404) */
+  function exists(url){
+    return fetch(url,{method:'HEAD',cache:'no-store'})
+      .then(function(r){return r.ok;})
+      .catch(function(){return false;});
+  }
+
   function tog(id){
     var el=document.getElementById(id);
     if(el.classList.contains('soon'))return;
     el.classList.toggle('open');
   }
+
+  function buildMonth(m){
+    var wrap=document.createElement('div');
+    wrap.className='month soon'; wrap.id=m.id;
+
+    var tagsHTML = m.tags.map(function(g){return '<span class="tag '+g.c+'">'+esc(g.t)+'</span>';}).join('');
+
+    var weeksHTML = m.weeks.map(function(w,i){
+      /* default: semua "Segera"; nanti di-upgrade jadi live kalau filenya ketemu */
+      return '<div class="wk off" data-i="'+i+'">'+
+               '<span class="wdot off"></span>'+
+               '<span class="wt">'+esc(w.t)+'<span class="wsub">'+esc(w.s)+'</span></span>'+
+               '<span class="soonlab">Segera</span>'+
+             '</div>';
+    }).join('');
+
+    wrap.innerHTML =
+      '<div class="mhead" onclick="tog(\''+m.id+'\')">'+
+        '<div class="cal gray"><b>'+esc(m.cal)+'</b><i>'+esc(m.mon)+'</i></div>'+
+        '<div class="minfo">'+
+          '<h3>'+esc(m.title)+'</h3>'+
+          '<p>'+esc(m.desc)+'</p>'+
+          '<div class="tags">'+tagsHTML+'</div>'+
+        '</div>'+
+        '<span class="pill soon">Segera</span>'+
+        '<span class="chev">⌄</span>'+
+      '</div>'+
+      '<div class="weeks">'+weeksHTML+'</div>';
+    return wrap;
+  }
+
+  function upgradeWeek(monthEl, w, i){
+    var row=monthEl.querySelector('.wk[data-i="'+i+'"]');
+    if(!row)return;
+    var a=document.createElement('a');
+    a.className='wk live'; a.href=w.href;
+    a.innerHTML='<span class="wdot"></span>'+
+                '<span class="wt">'+esc(w.t)+'<span class="wsub">'+esc(w.s)+'</span></span>'+
+                '<span class="go">Buka report →</span>';
+    row.replaceWith(a);
+  }
+
+  function finalizeMonth(monthEl, liveCount){
+    var cal=monthEl.querySelector('.cal');
+    var pill=monthEl.querySelector('.pill');
+    if(liveCount>0){
+      monthEl.classList.remove('soon');
+      cal.classList.remove('gray');
+      pill.classList.remove('soon');
+      pill.textContent = liveCount+' report siap';
+    }else{
+      pill.textContent='Segera';
+    }
+  }
+
+  (function build(){
+    var host=document.getElementById('months');
+    var jobs=[];
+    var monthLive=[]; /* index bulan -> jumlah report live */
+
+    MONTHS.forEach(function(m,mi){
+      var el=buildMonth(m);
+      host.appendChild(el);
+      monthLive[mi]=0;
+      m.weeks.forEach(function(w,i){
+        var url=m.folder+'/'+w.f;
+        jobs.push(
+          exists(url).then(function(ok){
+            if(ok){ w.href=url; upgradeWeek(el,w,i); monthLive[mi]++; }
+          })
+        );
+      });
+    });
+
+    Promise.all(jobs).then(function(){
+      var openIdx=-1;
+      MONTHS.forEach(function(m,mi){
+        var el=document.getElementById(m.id);
+        finalizeMonth(el, monthLive[mi]);
+        if(monthLive[mi]>0) openIdx=mi; /* buka bulan TERBARU yang ada report */
+      });
+      if(openIdx>=0){ document.getElementById(MONTHS[openIdx].id).classList.add('open'); }
+      else { document.getElementById(MONTHS[0].id).classList.add('open'); }
+    });
+  })();
 </script>
 </body>
 </html>
