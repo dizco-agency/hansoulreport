@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sooreca — Laporan Performa Agustus 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#0B5AA8;--deep:#083E77;--pink:#0E8FD6;--accent:#0E8FD6;--sky:#4FA9E0;--teal:#0E9E88;--gray:#6B7280;--line:#E5E7EB;--card:#F5F9FD;--ink:#374151;--amber:#E0A92C;--green:#1E9E5A;--blue:#2F6FC4}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',sans-serif;background:#F1F6FB;color:var(--navy)}
+  .deck{height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth}
+  .panel{min-height:100vh;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;padding:52px 84px;position:relative}
+  .inner{width:100%;max-width:1600px;margin:0 auto}
+  .split{display:flex;gap:76px;align-items:center}
+  .sinfo{width:440px;flex-shrink:0}
+  .snum{font-size:19px;font-weight:900;color:var(--accent);letter-spacing:.14em}
+  .stitle{font-size:44px;font-weight:900;margin:12px 0 20px;line-height:1.06;letter-spacing:-.01em}
+  .sdesc{font-size:21px;color:var(--ink);line-height:1.62}
+  .sdesc b{color:var(--navy);font-weight:700}
+  .sview{flex:1;min-width:0}
+  /* COVER */
+  .cover{background:linear-gradient(125deg,#062f5c 0%,#0B5AA8 48%,#1782c8 100%);color:#fff;overflow:hidden}
+  .cover::after{content:"";position:absolute;right:-90px;top:-90px;width:360px;height:360px;background:var(--accent);opacity:.85;transform:rotate(45deg)}
+  .cover::before{content:"";position:absolute;left:-120px;bottom:-140px;width:360px;height:360px;border:36px solid rgba(255,255,255,.07);border-radius:50%}
+  .ckick{font-size:19px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:#b8e0f7;position:relative;z-index:2}
+  .ctitle{font-size:92px;font-weight:900;line-height:1;margin:18px 0 12px;position:relative;z-index:2;letter-spacing:-.02em}
+  .cperiod{font-size:30px;font-weight:700;color:#dbeafb;position:relative;z-index:2}
+  .cmeta{font-size:19px;color:#a9c9e6;margin-top:24px;position:relative;z-index:2}
+  .cscroll{position:absolute;bottom:44px;left:84px;font-size:16px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#a9c9e6;display:flex;align-items:center;gap:12px;z-index:2}
+  .cscroll .arw{width:26px;height:26px;border-right:3px solid #b8e0f7;border-bottom:3px solid #b8e0f7;transform:rotate(45deg);animation:bounce 1.5s infinite}
+  @keyframes bounce{0%,100%{transform:rotate(45deg) translate(0,0)}50%{transform:rotate(45deg) translate(5px,5px)}}
+  .cbadges{position:relative;z-index:2;margin-top:34px;display:flex;gap:12px;flex-wrap:wrap}
+  .cbadge{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:9px 18px;font-size:15px;font-weight:600;color:#eaf4fd}
+  /* OVERALL METRICS */
+  .mhead{text-align:center;margin-bottom:44px}
+  .mhead .k{font-size:19px;font-weight:900;color:var(--accent);letter-spacing:.14em}
+  .mhead .t{font-size:50px;font-weight:900;margin-top:10px;letter-spacing:-.01em}
+  .mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .mcard{background:#fff;border:1px solid var(--line);border-radius:22px;padding:36px 40px;box-shadow:0 12px 34px rgba(11,90,168,.08)}
+  .mcard .l{font-size:16px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--gray);margin-bottom:12px}
+  .mcard .v{font-size:58px;font-weight:900;line-height:.95;letter-spacing:-.02em}
+  .mcard .s{font-size:18px;color:var(--gray);margin-top:12px;font-weight:500}
+  .v.navy{color:var(--navy)}.v.green{color:var(--green)}.v.pink{color:var(--accent)}.v.amber{color:var(--amber)}.v.teal{color:var(--teal)}
+  /* charts */
+  .chart{position:relative;width:100%}
+  .bar{cursor:pointer;transition:opacity .15s} .bar:hover{opacity:.82}
+  .axis{font-size:17px;fill:var(--gray)}
+  .tip{position:fixed;pointer-events:none;background:var(--deep);color:#fff;border-radius:10px;padding:12px 16px;font-size:17px;line-height:1.5;opacity:0;transform:translate(-50%,-100%);transition:opacity .1s;white-space:nowrap;z-index:99}
+  .tip b{font-size:18px}.tip .o{color:#9dc7ea}
+  /* stat row */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 24px;text-align:center}
+  .stat .l{font-size:15px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--gray);margin-bottom:10px}
+  .stat .v{font-size:40px;font-weight:900;line-height:1}
+  .stat .s{font-size:16px;color:var(--gray);margin-top:8px}
+  /* top SKU */
+  .sku-list{display:flex;flex-direction:column;gap:10px}
+  .sku{display:flex;align-items:center;gap:20px;padding:18px 24px;border:1px solid var(--line);border-radius:14px;cursor:pointer;transition:.15s;background:#fff}
+  .sku:hover{background:var(--card)} .sku.sel{border-color:var(--navy);background:#eaf3fb}
+  .sku .nm{font-size:22px;font-weight:800;min-width:230px}
+  .sku .track{flex:1;height:22px;background:#E9EFF6;border-radius:8px;overflow:hidden}
+  .sku .fill{height:100%;background:var(--navy);width:0;transition:width .7s cubic-bezier(.22,1,.36,1)}
+  .sku .g{font-size:22px;font-weight:800;color:var(--navy);min-width:120px;text-align:right}
+  .skuDetail{margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 24px}
+  .stack{display:flex;height:48px;border-radius:10px;overflow:hidden;margin:14px 0 18px}
+  .stack div{transition:width .6s ease}
+  .chips{display:flex;flex-wrap:wrap;gap:10px}
+  .chip{display:flex;align-items:center;gap:9px;font-size:18px;font-weight:600;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 14px}
+  .chip .sw{width:16px;height:16px;border-radius:5px;border:1px solid rgba(0,0,0,.08)}
+  /* donut */
+  .mixwrap{display:flex;gap:56px;align-items:center}
+  .donut{position:relative;width:360px;height:360px;flex-shrink:0} .donut svg{transform:rotate(-90deg)}
+  .dseg{fill:none;stroke-width:40;cursor:pointer;transition:stroke-width .2s,opacity .2s}
+  .dc{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;pointer-events:none}
+  .dc .l{font-size:15px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);text-align:center;max-width:180px}
+  .dc .v{font-size:42px;font-weight:900;margin-top:5px}
+  .leg{display:flex;flex-direction:column;gap:10px;flex:1}
+  .lg{display:flex;align-items:center;gap:14px;font-size:22px;cursor:pointer;padding:9px 13px;border-radius:11px;border:1px solid transparent;font-weight:600}
+  .lg:hover{background:var(--card);border-color:var(--line)} .lg .sw{width:19px;height:19px;border-radius:5px}.lg .p{margin-left:auto;font-weight:900}
+  /* funnel */
+  .funnelwrap{display:flex;gap:24px;align-items:stretch;justify-content:center}
+  .fcol{flex:1;max-width:620px}
+  .fstage{position:relative;margin:0 auto;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+  .fstage.show{opacity:1;transform:none}
+  .fstage .fl{font-size:18px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;opacity:.92}
+  .fstage .fv{font-size:44px;font-weight:900;line-height:1}
+  .fstage .fs{font-size:15px;opacity:.9;margin-top:2px}
+  .fconn{display:flex;align-items:center;justify-content:center;gap:12px;height:34px}
+  .fconn .cv{font-size:17px;font-weight:800;color:var(--navy);background:#EAF4FC;border:1px solid #BFDDF4;border-radius:999px;padding:5px 16px}
+  .fside{width:240px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;gap:16px}
+  .fmet{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;box-shadow:0 8px 22px rgba(11,90,168,.06)}
+  .fmet .l{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--gray)}
+  .fmet .v{font-size:30px;font-weight:900;color:var(--navy);margin-top:4px;line-height:1}
+  .fmet .s{font-size:14px;color:var(--gray);margin-top:3px}
+  /* highlight box */
+  .hl{background:#EAF4FC;border:1px solid #BFDDF4;border-radius:16px;padding:24px 28px;font-size:21px;line-height:1.6;color:var(--ink)}
+  .hl.pink{background:rgba(14,143,214,.06);border-color:#BFDDF4}
+  .hl b{color:var(--navy)}
+  .reco{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .rc{background:#fff;border:1px solid var(--line);border-left:6px solid var(--accent);border-radius:12px;padding:22px 26px}
+  .rc .n{font-size:15px;font-weight:900;color:var(--accent);letter-spacing:.08em}
+  .rc .t{font-size:23px;font-weight:800;margin:6px 0 8px}
+  .rc .d{font-size:17px;color:var(--ink);line-height:1.5}
+  /* nav dots */
+  .dots{position:fixed;right:28px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:13px;z-index:60}
+  .dot{width:13px;height:13px;border-radius:50%;background:#bcd0e6;border:none;cursor:pointer;transition:.2s;padding:0}
+  .dot:hover{background:#7ba3cc;transform:scale(1.2)}
+  .dot.on{background:var(--accent);transform:scale(1.35)}
+  /* video */
+  .vidwrap{display:flex;gap:56px;align-items:center}
+  .thumb{position:relative;width:400px;flex-shrink:0;border-radius:18px;overflow:hidden;cursor:pointer;box-shadow:0 14px 40px rgba(11,90,168,.22);border:1px solid var(--line);transition:transform .2s}
+  .thumb:hover{transform:translateY(-3px)}
+  .thumb img{width:100%;display:block}
+  .thumb .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(8,62,119,.12);transition:background .2s}
+  .thumb:hover .play{background:rgba(8,62,119,.24)}
+  .thumb .pbtn{width:88px;height:88px;border-radius:50%;background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.25);transition:transform .2s}
+  .thumb:hover .pbtn{transform:scale(1.08)}
+  .thumb .pbtn::after{content:"";margin-left:7px;border-left:30px solid var(--accent);border-top:19px solid transparent;border-bottom:19px solid transparent}
+  .thumb .tag{position:absolute;left:0;bottom:0;right:0;padding:18px 22px;background:linear-gradient(0deg,rgba(6,40,80,.92),transparent);color:#fff}
+  .thumb .tag .t{font-size:20px;font-weight:800}.thumb .tag .s{font-size:14px;color:#cfe3f5;margin-top:2px}
+  .openbtn{margin-top:20px;display:inline-flex;align-items:center;gap:9px;font-size:18px;font-weight:700;color:var(--accent);cursor:pointer;background:rgba(14,143,214,.08);border:1px solid #BFDDF4;border-radius:999px;padding:11px 22px;transition:.15s}
+  .openbtn:hover{background:rgba(14,143,214,.16)}
+  .vstats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}
+  .vstat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;text-align:center}
+  .vstat .v{font-size:28px;font-weight:900;color:var(--navy);line-height:1}
+  .vstat .l{font-size:13px;color:var(--gray);text-transform:uppercase;letter-spacing:.04em;margin-top:5px}
+  .lb{position:fixed;inset:0;background:rgba(6,28,58,.9);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;z-index:200;padding:40px}
+  .lb.open{display:flex}
+  .lbbox{position:relative;width:min(92vw,500px);aspect-ratio:9/16;max-height:88vh;background:#000;border-radius:16px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+  .lbbox iframe{width:100%;height:100%;border:0}
+  .lbclose{position:absolute;top:-16px;right:-16px;width:46px;height:46px;border-radius:50%;background:#fff;border:none;cursor:pointer;font-size:24px;font-weight:700;color:var(--navy);box-shadow:0 6px 18px rgba(0,0,0,.3);z-index:2;line-height:1;display:flex;align-items:center;justify-content:center}
+  .note{font-size:14px;color:var(--gray);margin-top:14px;font-style:italic}
+  @media(max-width:960px){.panel{padding:34px 24px}.split{flex-direction:column;gap:24px}.sinfo{width:100%}.ctitle{font-size:54px}.mgrid{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(2,1fr)}.mixwrap{flex-direction:column}.vidwrap{flex-direction:column}.thumb{width:100%}.funnelwrap{flex-direction:column}.fside{width:100%}.reco{grid-template-columns:1fr}.dots{display:none}}
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+  <!-- ============ COVER ============ -->
+  <section class="panel cover" id="p0">
+    <div class="inner">
+      <div class="ckick">Sooreca · Laporan Performa</div>
+      <div class="ctitle">Agustus 2026</div>
+      <div class="cperiod">Shopee Store · Meta Off-Platform · Affiliate</div>
+      <div class="cmeta">Periode data 1–12 Agustus 2026 · basis Pesanan Dibuat · disusun oleh DIZCO</div>
+      <div class="cbadges">
+        <div class="cbadge">GMV Toko Rp 156,4 Jt</div>
+        <div class="cbadge">Ads ROAS 4,25x</div>
+        <div class="cbadge">Affiliate Rp 44,5 Jt</div>
+        <div class="cbadge">Off-Platform Rp 20,9 Jt</div>
+      </div>
+    </div>
+    <div class="cscroll">Scroll <span class="arw"></span></div>
+  </section>
+
+  <!-- ============ 01 OVERALL ============ -->
+  <section class="panel" id="p1">
+    <div class="inner">
+      <div class="mhead">
+        <div class="k">01 · RINGKASAN TOKO</div>
+        <div class="t">Overall Metrics — Shopee</div>
+      </div>
+      <div class="mgrid">
+        <div class="mcard"><div class="l">GMV (Pesanan Dibuat)</div><div class="v navy">Rp 156,4 Jt</div><div class="s">683 pesanan · AOV Rp 229rb</div></div>
+        <div class="mcard"><div class="l">Pengunjung Unik</div><div class="v navy">13.641</div><div class="s">48.525 produk dilihat · 12 hari</div></div>
+        <div class="mcard"><div class="l">Konversi Pesanan</div><div class="v amber">2,55%</div><div class="s">puncak 8.8 di 4,23%</div></div>
+        <div class="mcard"><div class="l">Ads ROAS</div><div class="v green">4,25x</div><div class="s">spend ±Rp 34,9 Jt · sales Rp 150,0 Jt</div></div>
+        <div class="mcard"><div class="l">Affiliate (AMS)</div><div class="v teal">Rp 44,5 Jt</div><div class="s">ROI 9,9 · 171 pembeli baru</div></div>
+        <div class="mcard"><div class="l">Off-Platform (Meta)</div><div class="v pink">Rp 20,9 Jt</div><div class="s">83 pesanan · konv 2,04%</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 daily GMV -->
+  <section class="panel" id="p2">
+    <div class="inner"><div class="split">
+      <div class="sinfo"><div class="snum">02</div><div class="stitle">GMV Harian</div>
+        <div class="sdesc">Memuncak tajam di <b>8.8 payday</b> — <b>Rp 34,07 Jt</b> dari 148 pesanan (konversi 4,23% ≈ 2× hari biasa). Hari terlemah 05–06 Agustus.<br><br>Hover tiap bar untuk lihat GMV &amp; jumlah pesanan.</div></div>
+      <div class="sview"><div class="chart"><svg id="svgDaily" viewBox="0 0 680 330" width="100%" height="auto" preserveAspectRatio="xMidYMid meet"></svg></div></div>
+    </div></div>
+  </section>
+
+  <!-- 03 sales channel mix -->
+  <section class="panel" id="p3">
+    <div class="inner"><div class="split">
+      <div class="sinfo"><div class="snum">03</div><div class="stitle">Sumber Penjualan</div>
+        <div class="sdesc"><b>Halaman produk</b> menyumbang 87,2% GMV — mesin utama toko. <b>Video Penjual</b> &amp; <b>Affiliate</b> masing-masing ±6% dan tumbuh.<br><br>Hover segmen atau legend.</div></div>
+      <div class="sview"><div class="mixwrap">
+        <div class="donut"><svg viewBox="0 0 200 200" width="360" height="360" id="svgSrc"></svg>
+          <div class="dc"><div class="l" id="srcLab">Halaman Produk</div><div class="v" id="srcVal">87,2%</div></div></div>
+        <div class="leg" id="srcLeg"></div>
+      </div></div>
+    </div></div>
+  </section>
+
+  <!-- 04 traffic sources -->
+  <section class="panel" id="p4">
+    <div class="inner"><div class="split">
+      <div class="sinfo"><div class="snum">04</div><div class="stitle">Traffic Halaman Produk</div>
+        <div class="sdesc">Penjualan dari halaman produk didominasi <b>Pencarian</b> (30,4%) &amp; <b>Toko</b> (27,8%) — kombinasi organik + iklan search. Sisanya rekomendasi algoritma.</div></div>
+      <div class="sview"><div class="chart"><svg id="svgTraffic" viewBox="0 0 680 260" width="100%" height="auto" preserveAspectRatio="xMidYMid meet"></svg></div></div>
+    </div></div>
+  </section>
+
+  <!-- 05 iklan -->
+  <section class="panel" id="p5">
+    <div class="inner"><div class="split">
+      <div class="sinfo"><div class="snum">05</div><div class="stitle">Iklan Shopee</div>
+        <div class="sdesc">ROAS blended <b>4,25x</b> — iklan menyentuh <b>95,9%</b> GMV toko. Iklan Toko paling efisien (5,75x), masih ada ruang ke target 5x.</div></div>
+      <div class="sview">
+        <div class="stats" style="margin-bottom:18px">
+          <div class="stat"><div class="l">Sales Iklan</div><div class="v navy">Rp 150,0 Jt</div><div class="s">3 tipe iklan</div></div>
+          <div class="stat"><div class="l">Spend</div><div class="v navy">Rp 34,9 Jt</div><div class="s">12 hari</div></div>
+          <div class="stat"><div class="l">Klik · CTR</div><div class="v navy">16,1rb</div><div class="s">CTR 3,17%</div></div>
+          <div class="stat"><div class="l">ROAS</div><div class="v green">4,25x</div><div class="s">target 5x</div></div>
+        </div>
+        <div class="chart"><svg id="svgRoas" viewBox="0 0 680 120" width="100%" height="auto" preserveAspectRatio="xMidYMid meet"></svg></div>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- 06 top SKU -->
+  <section class="panel" id="p6">
+    <div class="inner"><div class="split">
+      <div class="sinfo"><div class="snum">06</div><div class="stitle">Top Produk by GMV</div>
+        <div class="sdesc"><b>Shower Filter</b> hero #1 (Rp 74,0 Jt, 401 pcs). Bundle <b>KIT + REFILL</b> mendominasi tiap produk.<br><br><b>Klik tiap produk</b> untuk breakdown varian.</div></div>
+      <div class="sview">
+        <div class="sku-list" id="skuList"></div>
+        <div class="skuDetail" id="skuDetail"></div>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- 07 OFF-PLATFORM FUNNEL -->
+  <section class="panel" id="p7">
+    <div class="inner">
+      <div class="mhead" style="margin-bottom:30px">
+        <div class="k">07 · OFF-PLATFORM · META ADS</div>
+        <div class="t">Funnel Konversi Iklan Meta</div>
+      </div>
+      <div class="funnelwrap">
+        <div class="fcol">
+          <div class="fstage" id="fs0" style="width:100%;height:104px;background:linear-gradient(180deg,#2E9BDC,#1782C8);clip-path:polygon(0 0,100% 0,90% 100%,10% 100%);border-radius:6px 6px 0 0">
+            <div class="fl">Kunjungan</div><div class="fv">4.096</div><div class="fs">3.967 pengunjung</div></div>
+          <div class="fconn"><span class="cv" id="cv0">26,19% ke keranjang</span></div>
+          <div class="fstage" id="fs1" style="width:80%;height:104px;background:linear-gradient(180deg,#1782C8,#0B5AA8);clip-path:polygon(0 0,100% 0,87% 100%,13% 100%)">
+            <div class="fl">Tambah ke Keranjang</div><div class="fv">1.039</div><div class="fs">1.459 produk · Rp 104,3 Jt</div></div>
+          <div class="fconn"><span class="cv" id="cv1">7,80% jadi pesanan</span></div>
+          <div class="fstage" id="fs2" style="width:58%;height:104px;background:linear-gradient(180deg,#0B5AA8,#083E77);clip-path:polygon(0 0,100% 0,82% 100%,18% 100%);border-radius:0 0 6px 6px">
+            <div class="fl">Pesanan Dibuat</div><div class="fv">83</div><div class="fs">81 pembeli · 69 baru</div></div>
+        </div>
+        <div class="fside">
+          <div class="fmet"><div class="l">Penjualan</div><div class="v">Rp 20,9 Jt</div><div class="s">↑ 15,9% vs bulan lalu</div></div>
+          <div class="fmet"><div class="l">Konversi Total</div><div class="v">2,04%</div><div class="s">kunjungan → pesanan</div></div>
+          <div class="fmet"><div class="l">Nilai Keranjang</div><div class="v">Rp 104,3 Jt</div><div class="s">potensi belum checkout</div></div>
+        </div>
+      </div>
+      <div class="note">Basis 1–11 Agustus 2026 · 2 channel Meta (Facebook Ads + Collaborative Ads). Drop terbesar di tahap keranjang → pesanan (92% keranjang belum checkout).</div>
+    </div>
+  </section>
+
+  <!-- 08 off-platform campaigns -->
+  <section class="panel" id="p8">
+    <div class="inner"><div class="split">
+      <div class="sinfo"><div class="snum">08</div><div class="stitle">Campaign Meta</div>
+        <div class="sdesc"><b>Landingpage</b> jadi tulang punggung (Rp 15,64 Jt, 58 pesanan). <b>Mom &amp; Baby</b> konversinya tertinggi (3,08%). <b>lpbidet</b> belum menghasilkan — perlu evaluasi.</div></div>
+      <div class="sview"><div class="chart"><svg id="svgCamp" viewBox="0 0 680 210" width="100%" height="auto" preserveAspectRatio="xMidYMid meet"></svg></div>
+        <div class="hl" style="margin-top:22px">Top produk off-platform: <b>Shower Filter</b> Rp 10,04 Jt · <b>Faucet Filter</b> Rp 5,37 Jt · <b>Universal</b> Rp 2,46 Jt</div>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- 09 affiliate summary -->
+  <section class="panel" id="p9">
+    <div class="inner"><div class="split">
+      <div class="sinfo"><div class="snum">09</div><div class="stitle">Affiliate — Ringkasan (AMS)</div>
+        <div class="sdesc">Kanal tumbuh pesat: GMV <b>+57%</b>, pembeli baru <b>+54%</b>. <b>171 dari 210 pembeli</b> adalah pembeli baru — mesin akuisisi paling kuat.</div></div>
+      <div class="sview"><div class="stats">
+        <div class="stat"><div class="l">Affiliate GMV</div><div class="v green">Rp 44,5 Jt</div><div class="s">↑ 57,3%</div></div>
+        <div class="stat"><div class="l">Pesanan</div><div class="v navy">224</div><div class="s">296 produk terjual</div></div>
+        <div class="stat"><div class="l">ROI</div><div class="v navy">9,9</div><div class="s">komisi Rp 4,5 Jt</div></div>
+        <div class="stat"><div class="l">Pembeli Baru</div><div class="v teal">171</div><div class="s">81% dari pembeli</div></div>
+      </div>
+      <div class="hl pink" style="margin-top:22px">Klik naik <b>+17,7%</b> ke 2.400 · total pembeli <b>210</b> (↑43,8%) — momentum konten affiliate sedang tinggi.</div>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- 10 top affiliates -->
+  <section class="panel" id="p10">
+    <div class="inner"><div class="split">
+      <div class="sinfo"><div class="snum">10</div><div class="stitle">Top 5 Affiliate</div>
+        <div class="sdesc"><b>shopbackid</b> &amp; <b>Shopee Media Network</b> memimpin GMV. <b>Ika Maulidah</b> jadi kreator individu #1 (konten organik). Hover untuk ROI.</div></div>
+      <div class="sview"><div class="chart"><svg id="svgAff" viewBox="0 0 680 270" width="100%" height="auto" preserveAspectRatio="xMidYMid meet"></svg></div></div>
+    </div></div>
+  </section>
+
+  <!-- 11 platform mix -->
+  <section class="panel" id="p11">
+    <div class="inner"><div class="split">
+      <div class="sinfo"><div class="snum">11</div><div class="stitle">Komposisi Platform Affiliate</div>
+        <div class="sdesc"><b>Instagram</b> (21,9%) &amp; <b>Shopee Video</b> (17,9%) jadi channel affiliate terbesar setelah "lainnya". Facebook &amp; TikTok masih kecil — ruang untuk digarap.<br><br>Hover segmen/legend.</div></div>
+      <div class="sview"><div class="mixwrap">
+        <div class="donut"><svg viewBox="0 0 200 200" width="360" height="360" id="svgMix"></svg>
+          <div class="dc"><div class="l" id="mixLab">Terbesar</div><div class="v" id="mixVal">50,5%</div></div></div>
+        <div class="leg" id="mixLeg"></div>
+      </div></div>
+    </div></div>
+  </section>
+
+  <!-- 12 top affiliate products -->
+  <section class="panel" id="p12">
+    <div class="inner"><div class="split">
+      <div class="sinfo"><div class="snum">12</div><div class="stitle">Top Produk via Affiliate</div>
+        <div class="sdesc"><b>Shower Filter</b> mendominasi konten affiliate (Rp 21,03 Jt, 128 pcs). Faucet &amp; Universal menyusul. Hover untuk jumlah pcs.</div></div>
+      <div class="sview"><div class="chart"><svg id="svgAffProd" viewBox="0 0 680 260" width="100%" height="auto" preserveAspectRatio="xMidYMid meet"></svg></div></div>
+    </div></div>
+  </section>
+
+  <!-- 13 video highlight -->
+  <section class="panel" id="p13">
+    <div class="inner"><div class="split">
+      <div class="sinfo"><div class="snum">13</div><div class="stitle">Video Kreator Highlight</div>
+        <div class="sdesc"><b>Ika Maulidah</b> (@ikams_97) — top kreator affiliate Agustus. Konten <b>"Wajib Pakai Filter Air Ini"</b> raih <b>60,5rb views</b> &amp; Rp 3,4 Jt penjualan.<br><br><b>Klik thumbnail</b> untuk putar videonya di sini.</div>
+        <button class="openbtn" onclick="openLB()">▶ Putar video</button>
+        <div class="vstats">
+          <div class="vstat"><div class="v">60,5rb</div><div class="l">Views</div></div>
+          <div class="vstat"><div class="v">Rp 3,4 Jt</div><div class="l">Penjualan</div></div>
+          <div class="vstat"><div class="v">21</div><div class="l">Terjual</div></div>
+        </div>
+      </div>
+      <div class="sview"><div class="vidwrap">
+        <div class="thumb" onclick="openLB()">
+          <img id="vthumb" alt="Video Ika Maulidah — Wajib Pakai Filter Air Ini">
+          <div class="play"><div class="pbtn"></div></div>
+          <div class="tag"><div class="t">Wajib Pakai Filter Air Ini</div><div class="s">Ika Maulidah · @ikams_97 · UGC affiliate</div></div>
+        </div>
+      </div></div>
+    </div></div>
+  </section>
+
+  <!-- 14 recommendations -->
+  <section class="panel" id="p14">
+    <div class="inner">
+      <div class="mhead" style="margin-bottom:36px">
+        <div class="k">14 · LANGKAH BERIKUTNYA</div>
+        <div class="t">Rekomendasi Prioritas</div>
+      </div>
+      <div class="reco">
+        <div class="rc"><div class="n">01 · KONVERSI</div><div class="t">Selamatkan keranjang Meta</div><div class="d">92% keranjang off-platform (Rp 104 Jt nilai) belum checkout. Retargeting + reminder → target angkat konversi keranjang→order dari 7,8% ke 12%.</div></div>
+        <div class="rc"><div class="n">02 · IKLAN</div><div class="t">Dorong ROAS ke 5x</div><div class="d">Realokasi budget ke Iklan Toko (ROAS 5,75x) &amp; SKU hero. Pangkas campaign lpbidet yang belum menghasilkan.</div></div>
+        <div class="rc"><div class="n">03 · AFFILIATE</div><div class="t">Skalakan kreator organik</div><div class="d">Ika Maulidah &amp; kreator Ibu-Bayi punya ROI tinggi. Perbanyak sampel + reward untuk mengulang momentum GMV +57%.</div></div>
+        <div class="rc"><div class="n">04 · PRODUK</div><div class="t">Perkuat bundle KIT + REFILL</div><div class="d">Bundle menyumbang &gt;68% GMV tiap SKU. Jadikan default pilihan &amp; push refill sebagai repeat-purchase engine.</div></div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- lightbox -->
+<div class="lb" id="lb" onclick="if(event.target===this)closeLB()">
+  <div class="lbbox">
+    <button class="lbclose" onclick="closeLB()">&times;</button>
+    <iframe id="lbframe" allow="autoplay; fullscreen" allowfullscreen referrerpolicy="no-referrer"></iframe>
+  </div>
+</div>
+
+<div class="dots" id="dots"></div>
+
+<script>
+var DRIVE_ID='1d9fzfK-62oaJ3NMD1buxJFoj7gCOMD2_';
+function openLB(){var f=document.getElementById('lbframe');f.src='https://drive.google.com/file/d/'+DRIVE_ID+'/preview';document.getElementById('lb').classList.add('open');}
+function closeLB(){document.getElementById('lb').classList.remove('open');document.getElementById('lbframe').src='';}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLB();});
+
+/* video thumbnail (inline SVG, Sooreca blue, mirrors real thumbnail) */
+document.getElementById('vthumb').src='data:image/svg+xml;utf8,'+encodeURIComponent(
+'<svg xmlns="http://www.w3.org/2000/svg" width="480" height="632" viewBox="0 0 480 632">'+
+'<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1782C8"/><stop offset="0.55" stop-color="#0B5AA8"/><stop offset="1" stop-color="#062f5c"/></linearGradient></defs>'+
+'<rect width="480" height="632" fill="url(#g)"/>'+
+'<circle cx="90" cy="120" r="150" fill="#ffffff" opacity="0.05"/><circle cx="420" cy="470" r="180" fill="#ffffff" opacity="0.05"/>'+
+'<rect x="150" y="150" width="180" height="150" rx="16" fill="#ffffff" opacity="0.14"/>'+
+'<rect x="188" y="120" width="104" height="52" rx="10" fill="#cfe3f5"/><rect x="205" y="300" width="70" height="120" rx="8" fill="#ffffff" opacity="0.22"/>'+
+'<circle cx="240" cy="452" r="8" fill="#bfe0fa"/><circle cx="222" cy="486" r="6" fill="#bfe0fa"/><circle cx="258" cy="490" r="5" fill="#bfe0fa"/>'+
+'<rect x="34" y="40" width="230" height="40" rx="8" fill="#ffd23f"/>'+
+'<text x="50" y="68" font-family="Inter,Arial,sans-serif" font-size="22" font-weight="900" fill="#083E77">Wajib Pakai Filter Air Ini</text>'+
+'<text x="240" y="475" font-family="Inter,Arial,sans-serif" font-size="30" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="2" opacity="0.92">SOORECA</text>'+
+'</svg>');
+
+var NS='http://www.w3.org/2000/svg';
+var tip=document.createElement('div'); tip.className='tip'; document.body.appendChild(tip);
+function showTip(e,html){tip.innerHTML=html; tip.style.left=e.clientX+'px'; tip.style.top=(e.clientY-10)+'px'; tip.style.opacity=1;}
+function hideTip(){tip.style.opacity=0;}
+function el(t,a){var e=document.createElementNS(NS,t); for(var k in a)e.setAttribute(k,a[k]); return e;}
+function fmtJt(v){return 'Rp '+v.toFixed(2).replace('.',',')+' Jt';}
+var deck=document.getElementById('deck');
+function whenVisible(id,fn){var o=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){fn();o.disconnect();}})},{root:deck,threshold:.2});o.observe(document.getElementById(id));}
+
+/* nav dots */
+(function(){
+  var panels=document.querySelectorAll('.panel');var dotsEl=document.getElementById('dots');var dots=[];
+  panels.forEach(function(p,i){var b=document.createElement('button');b.className='dot'+(i===0?' on':'');b.title=p.id;
+    b.addEventListener('click',function(){p.scrollIntoView({behavior:'smooth'});});dotsEl.appendChild(b);dots.push(b);});
+  var ob=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){var idx=[].indexOf.call(panels,x.target);dots.forEach(function(d,i){d.classList.toggle('on',i===idx);});}})},{root:deck,threshold:.55});
+  panels.forEach(function(p){ob.observe(p);});
+})();
+
+/* daily GMV */
+(function(){
+  var D=[{d:'01',g:11.60,o:53},{d:'02',g:11.11,o:53},{d:'03',g:14.77,o:60},{d:'04',g:10.91,o:44},{d:'05',g:8.12,o:39},{d:'06',g:8.67,o:42},{d:'07',g:11.78,o:49},{d:'08',g:34.07,o:148},{d:'09',g:11.24,o:52},{d:'10',g:11.28,o:49},{d:'11',g:9.34,o:42},{d:'12',g:13.50,o:52}];
+  var svg=document.getElementById('svgDaily'),W=680,H=330,pT=18,pB=32,pL=10,pR=10,mx=36,n=D.length,gap=11,bw=(W-pL-pR-(n-1)*gap)/n;
+  function y(v){return pT+(1-v/mx)*(H-pT-pB);}
+  [0,12,24,36].forEach(function(gv){svg.appendChild(el('line',{x1:pL,x2:W-pR,y1:y(gv),y2:y(gv),stroke:'#E5E7EB','stroke-width':1}));var t=el('text',{x:pL,y:y(gv)-5,class:'axis'});t.textContent=gv;svg.appendChild(t);});
+  var rects=[];
+  D.forEach(function(it,i){var x=pL+i*(bw+gap);var r=el('rect',{x:x,width:bw,y:H-pB,height:0,rx:5,class:'bar',fill:it.d==='08'?'#0E8FD6':'#0B5AA8'});svg.appendChild(r);rects.push([r,it,x,bw]);
+    var tx=el('text',{x:x+bw/2,y:H-11,'text-anchor':'middle',class:'axis'});tx.textContent=it.d;svg.appendChild(tx);
+    r.addEventListener('mousemove',function(e){showTip(e,'<b>'+fmtJt(it.g)+'</b><br>'+it.o+' pesanan · <span class="o">'+it.d+' Agu</span>'+(it.d==='08'?'<br>🔥 payday 8.8':''));});
+    r.addEventListener('mouseleave',hideTip);
+  });
+  whenVisible('svgDaily',function(){rects.forEach(function(a,i){var r=a[0],it=a[1];var h=(H-pT-pB)-(y(it.g)-pT);setTimeout(function(){r.style.transition='y .8s cubic-bezier(.22,1,.36,1),height .8s cubic-bezier(.22,1,.36,1)';r.setAttribute('y',y(it.g));r.setAttribute('height',h);},i*40);});});
+})();
+
+/* horizontal bars helper */
+function hbars(svgId,items,W,H,mx,fmt,pad,rpad,lfont){
+  var svg=document.getElementById(svgId);pad=pad||150;rpad=rpad||110;lfont=lfont||19;var n=items.length,gap=11,bh=(H-(n-1)*gap)/n,xmax=W-pad-rpad;var rs=[];
+  items.forEach(function(it,i){var yy=i*(bh+gap);
+    var lab=el('text',{x:0,y:yy+bh/2+6,'font-size':lfont,'font-weight':'700',fill:'#0B5AA8'});lab.textContent=it.label;svg.appendChild(lab);
+    svg.appendChild(el('rect',{x:pad,y:yy,width:xmax,height:bh,rx:7,fill:'#E9EFF6'}));
+    var r=el('rect',{x:pad,y:yy,width:0,height:bh,rx:7,fill:it.color||'#0B5AA8',class:'bar'});svg.appendChild(r);rs.push([r,xmax*(it.val/mx)]);
+    var v=el('text',{x:W,y:yy+bh/2+6,'text-anchor':'end','font-size':'18','font-weight':'800',fill:'#0B5AA8'});v.textContent=fmt(it);svg.appendChild(v);
+    if(it.tip){r.addEventListener('mousemove',function(e){showTip(e,it.tip);});r.addEventListener('mouseleave',hideTip);}
+  });
+  whenVisible(svgId,function(){rs.forEach(function(a,i){setTimeout(function(){a[0].style.transition='width .7s cubic-bezier(.22,1,.36,1)';a[0].setAttribute('width',a[1]);},i*60);});});
+}
+hbars('svgTraffic',[
+  {label:'Pencarian',val:30.44,color:'#0B5AA8',tip:'Pencarian · Rp 41,50 Jt · 30,4%'},
+  {label:'Toko',val:27.84,color:'#1782C8',tip:'Toko (direct) · Rp 37,95 Jt · 27,8%'},
+  {label:'Lainnya',val:20.04,color:'#4FA9E0',tip:'Lainnya · Rp 27,32 Jt · 20,0%'},
+  {label:'Rekomendasi',val:13.42,color:'#0E9E88',tip:'Rekomendasi · Rp 18,30 Jt · 13,4%'},
+  {label:'Keranjang',val:4.06,color:'#E0A92C',tip:'Keranjang · Rp 5,53 Jt · 4,1%'}
+],680,260,32,function(it){return it.val.toFixed(1).replace('.',',')+'%';},160,84);
+
+/* ROAS bar */
+(function(){var svg=document.getElementById('svgRoas'),W=680,pad=10,xmax=W-pad-110,mx=6;
+ svg.appendChild(el('rect',{x:pad,y:40,width:xmax,height:38,rx:8,fill:'#E9EFF6'}));
+ var r=el('rect',{x:pad,y:40,width:0,height:38,rx:8,fill:'#1E9E5A'});svg.appendChild(r);
+ whenVisible('svgRoas',function(){setTimeout(function(){r.style.transition='width .8s ease';r.setAttribute('width',xmax*(4.25/mx));},60);});
+ var tx=pad+xmax*(5/mx);svg.appendChild(el('line',{x1:tx,x2:tx,y1:20,y2:98,stroke:'#0E8FD6','stroke-width':2}));
+ var tt=el('text',{x:tx,y:16,'text-anchor':'middle','font-size':'16','font-weight':'800',fill:'#0E8FD6'});tt.textContent='target 5x';svg.appendChild(tt);
+ var v=el('text',{x:pad+xmax*(4.25/mx)+12,y:66,'font-size':'22','font-weight':'900',fill:'#1E9E5A'});v.textContent='4,25x';svg.appendChild(v);
+})();
+
+/* Top SKU (products + variants) */
+var COL={deep:'#0B5AA8',azure:'#1782C8',sky:'#4FA9E0',teal:'#0E9E88',amber:'#E0A92C',gray:'#B9C7DB'};
+var SKUS=[
+ {name:'Shower Filter',gmv:74.0,colors:[['KIT + REFILL',68.7,'deep'],['SHOWER KIT ONLY',22.4,'azure'],['BODY REFILL',6.6,'teal'],['HEAD REFILL',2.3,'amber']]},
+ {name:'Faucet Filter',gmv:42.9,colors:[['KIT + REFILL',73.2,'deep'],['KIT ONLY',22.6,'azure'],['REFILL 3PCS',4.2,'teal']]},
+ {name:'Universal Filter',gmv:16.65,colors:[['KIT + REFILL',69.4,'deep'],['KIT ONLY',22.5,'azure'],['REFILL 3PCS',8.1,'teal']]},
+ {name:'Bidet Filter',gmv:12.5,colors:[['KIT + REFILL',76.5,'deep'],['BIDET KIT ONLY',14.3,'azure'],['REFILL 3PCS',9.2,'teal']]},
+ {name:'Shower Refill',gmv:3.86,colors:[['BODY REFILL',71.3,'deep'],['HEAD REFILL',28.7,'azure']]}
+];
+var maxG=74.0,list=document.getElementById('skuList');
+SKUS.forEach(function(s,i){var d=document.createElement('div');d.className='sku'+(i===0?' sel':'');
+  d.innerHTML='<div class="nm">'+s.name+'</div><div class="track"><div class="fill" data-w="'+(s.gmv/maxG*100)+'"></div></div><div class="g">'+fmtJt(s.gmv)+'</div>';
+  d.addEventListener('click',function(){document.querySelectorAll('.sku').forEach(function(x){x.classList.remove('sel')});d.classList.add('sel');renderSKU(s);});
+  list.appendChild(d);});
+function renderSKU(s){var det=document.getElementById('skuDetail');var st='<div class="stack">';s.colors.forEach(function(c){st+='<div style="width:'+c[1]+'%;background:'+COL[c[2]]+'"></div>';});st+='</div>';
+  var ch='<div class="chips">';s.colors.forEach(function(c){ch+='<div class="chip"><span class="sw" style="background:'+COL[c[2]]+'"></span>'+c[0]+' <b style="margin-left:2px">'+c[1].toFixed(1).replace('.',',')+'%</b></div>';});ch+='</div>';
+  det.innerHTML='<div style="font-size:19px;font-weight:800;margin-bottom:3px">'+s.name+' · '+fmtJt(s.gmv)+'</div><div style="font-size:15px;color:#6B7280">Breakdown per varian (% dari GMV produk)</div>'+st+ch;}
+renderSKU(SKUS[0]);
+whenVisible('skuList',function(){document.querySelectorAll('#skuList .fill').forEach(function(f){f.style.width=f.dataset.w+'%';});});
+
+/* off-platform funnel animate */
+whenVisible('fs0',function(){['fs0','fs1','fs2'].forEach(function(id,i){setTimeout(function(){document.getElementById(id).classList.add('show');},i*260);});});
+
+/* campaigns */
+hbars('svgCamp',[
+ {label:'Landingpage',val:15.64,color:'#0B5AA8',tip:'Landingpage · Rp 15,64 Jt · 58 pesanan · konv 1,81%'},
+ {label:'Mom & Baby',val:4.52,color:'#1782C8',tip:'Mom & Baby · Rp 4,52 Jt · 22 pesanan · konv 3,08%'},
+ {label:'Jerawat',val:0.73,color:'#4FA9E0',tip:'Jerawat (Collab) · Rp 0,73 Jt · 3 pesanan'},
+ {label:'lpbidet',val:0.0,color:'#B9C7DB',tip:'lpbidet · Rp 0 · 3 kunjungan · belum ada order'}
+],680,210,16,function(it){return fmtJt(it.val);},170,120);
+
+/* top affiliates */
+hbars('svgAff',[
+ {label:'shopbackid',val:4.72,tip:'shopbackid · Rp 4,72 Jt · 31 pcs · ROI 6,8'},
+ {label:'Shopee Media Network',val:4.61,color:'#1782C8',tip:'Shopee Media Network · Rp 4,61 Jt · 30 pcs · ROI 13,3'},
+ {label:'Ika Maulidah',val:3.37,color:'#0E9E88',tip:'Ika Maulidah (@ikams_97) · Rp 3,37 Jt · 21 pcs · ROI 8,8'},
+ {label:'Razkha_Alghani',val:1.63,color:'#4FA9E0',tip:'Razkha_Alghani · Rp 1,63 Jt · 9 pcs · ROI 9,1'},
+ {label:'MOVA Official',val:1.56,color:'#4FA9E0',tip:'MOVA Official · Rp 1,56 Jt · 10 pcs · ROI 6,7'}
+],680,270,5,function(it){return fmtJt(it.val);},250,116,17);
+
+/* top affiliate products */
+hbars('svgAffProd',[
+ {label:'Shower Filter',val:21.03,color:'#0E9E88',tip:'Shower Filter · Rp 21,03 Jt · 128 pcs'},
+ {label:'Faucet Filter',val:13.33,color:'#0E9E88',tip:'Faucet Filter · Rp 13,33 Jt · 86 pcs'},
+ {label:'Universal Filter',val:5.98,color:'#0E9E88',tip:'Universal Filter · Rp 5,98 Jt · 51 pcs'},
+ {label:'Bidet Filter',val:3.71,color:'#0E9E88',tip:'Bidet Filter · Rp 3,71 Jt · 28 pcs'},
+ {label:'Travel Shower',val:0.46,color:'#0E9E88',tip:'Travel Shower · Rp 0,46 Jt · 3 pcs'}
+],680,260,21.03,function(it){return fmtJt(it.val);},170,116);
+
+/* donut helper */
+function donut(svgId,legId,labId,valId,segs,defLab,defVal){
+  var svg=document.getElementById(svgId),CIRC=502.655,off=0,mixLab=document.getElementById(labId),mixVal=document.getElementById(valId),leg=document.getElementById(legId);
+  svg.appendChild(el('circle',{cx:100,cy:100,r:80,fill:'none',stroke:'#E9EFF6','stroke-width':30}));
+  var circles=[];
+  segs.forEach(function(s,i){var len=s.p/100*CIRC;var c=el('circle',{cx:100,cy:100,r:80,fill:'none',stroke:s.c,'stroke-width':30,'stroke-dasharray':'0 '+CIRC,'stroke-dashoffset':-off,class:'dseg'});c.style.transition='stroke-dasharray 1s cubic-bezier(.22,1,.36,1)';svg.appendChild(c);circles.push([c,len]);
+    (function(seg,circle){function f(){mixLab.textContent=seg.n;mixVal.textContent=seg.p.toFixed(1).replace('.',',')+'%';mixVal.style.color=seg.c;circle.style.strokeWidth=34;}
+     function r(){mixLab.textContent=defLab;mixVal.textContent=defVal;mixVal.style.color='#0B5AA8';circle.style.strokeWidth=30;}
+     circle.addEventListener('mouseenter',f);circle.addEventListener('mouseleave',r);
+     var l=document.createElement('div');l.className='lg';l.innerHTML='<span class="sw" style="background:'+seg.c+'"></span>'+seg.n+'<span class="p">'+seg.p.toFixed(1).replace('.',',')+'%</span>';l.addEventListener('mouseenter',f);l.addEventListener('mouseleave',r);leg.appendChild(l);
+    })(s,c);off+=len;});
+  whenVisible(svgId,function(){circles.forEach(function(a,i){setTimeout(function(){a[0].setAttribute('stroke-dasharray',a[1].toFixed(1)+' '+CIRC);},i*90);});});
+}
+donut('svgSrc','srcLeg','srcLab','srcVal',[
+ {n:'Halaman Produk',p:87.2,c:'#0B5AA8'},
+ {n:'Video Penjual',p:6.6,c:'#0E9E88'},
+ {n:'Affiliate',p:6.2,c:'#4FA9E0'}
+],'Halaman Produk','87,2%');
+donut('svgMix','mixLeg','mixLab','mixVal',[
+ {n:'Lainnya',p:50.5,c:'#0B5AA8'},
+ {n:'Instagram',p:21.9,c:'#1782C8'},
+ {n:'Shopee Video',p:17.9,c:'#0E9E88'},
+ {n:'Facebook',p:5.4,c:'#E0A92C'},
+ {n:'TikTok',p:1.8,c:'#B9C7DB'}
+],'Terbesar','50,5%');
+</script>
+</body>
+</html>
