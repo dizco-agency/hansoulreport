@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HanSoul Shopee, TikTok &amp; Meta CPAS — 1&ndash;17 September 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#1E2761;--pink:#E91E63;--teal:#0E9E88;--gray:#6B7280;--line:#E5E7EB;--card:#F7F9FC;--ink:#374151;--amber:#E0A92C;--green:#1E9E5A;--blue:#2F6FC4;--red:#C0322E}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:auto}
+  body{font-family:'Inter',sans-serif;background:#F4F6FA;color:var(--navy)}
+  .deck{height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:auto}
+  .panel{min-height:100vh;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;padding:56px 88px;position:relative}
+  .inner{width:100%;max-width:1600px;margin:0 auto}
+  .split{display:flex;gap:80px;align-items:center}
+  .sinfo{width:440px;flex-shrink:0}
+  .snum{font-size:19px;font-weight:900;color:var(--pink);letter-spacing:.14em}
+  .stitle{font-size:44px;font-weight:900;margin:12px 0 20px;line-height:1.08;letter-spacing:-.01em}
+  .sdesc{font-size:21px;color:var(--ink);line-height:1.62}
+  .sdesc b{color:var(--navy);font-weight:700}
+  .sview{flex:1;min-width:0}
+  /* cover */
+  .cover{background:linear-gradient(125deg,#161d4d 0%,#1E2761 45%,#2b3778 100%);color:#fff;overflow:hidden}
+  .cover::after{content:"";position:absolute;right:-90px;top:-90px;width:360px;height:360px;background:var(--pink);opacity:.9;transform:rotate(45deg)}
+  .cover::before{content:"";position:absolute;left:-120px;bottom:-140px;width:360px;height:360px;border:36px solid rgba(255,255,255,.06);border-radius:50%}
+  .ckick{font-size:18px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#f5a8c4;position:relative;z-index:2}
+  .ctitle{font-size:76px;font-weight:900;line-height:1;margin:16px 0 8px;position:relative;z-index:2;letter-spacing:-.02em}
+  .cperiod{font-size:30px;font-weight:700;color:#dbe2f7;position:relative;z-index:2}
+  .cmeta{font-size:18px;color:#aeb9de;margin-top:22px;position:relative;z-index:2;max-width:820px;line-height:1.6}
+  .cscroll{position:absolute;bottom:44px;left:88px;font-size:15px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#aeb9de;display:flex;align-items:center;gap:12px;z-index:2}
+  .cscroll .arw{width:24px;height:24px;border-right:3px solid #f5a8c4;border-bottom:3px solid #f5a8c4;transform:rotate(45deg);animation:bounce 1.5s infinite}
+  @keyframes bounce{0%,100%{transform:rotate(45deg) translate(0,0)}50%{transform:rotate(45deg) translate(5px,5px)}}
+  /* metric head/grid */
+  .mhead{text-align:center;margin-bottom:46px}
+  .mhead .k{font-size:18px;font-weight:900;color:var(--pink);letter-spacing:.14em}
+  .mhead .t{font-size:44px;font-weight:900;margin-top:10px;letter-spacing:-.01em}
+  .mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .mcard{background:#fff;border:1px solid var(--line);border-radius:22px;padding:32px 34px;box-shadow:0 12px 34px rgba(30,39,97,.07)}
+  .mcard .l{font-size:15px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--gray);margin-bottom:12px}
+  .mcard .v{font-size:46px;font-weight:900;line-height:.95;letter-spacing:-.02em}
+  .mcard .s{font-size:16px;color:var(--gray);margin-top:10px;font-weight:500}
+  .v.navy{color:var(--navy)}.v.green{color:var(--green)}.v.pink{color:var(--pink)}.v.amber{color:var(--amber)}.v.teal{color:var(--teal)}.v.red{color:var(--red)}
+  .chart{position:relative;width:100%}
+  .bar{cursor:pointer;transition:opacity .15s}.bar:hover{opacity:.82}
+  .axis{font-size:16px;fill:var(--gray)}
+  .tip{position:fixed;pointer-events:none;background:var(--navy);color:#fff;border-radius:10px;padding:12px 16px;font-size:16px;line-height:1.5;opacity:0;transform:translate(-50%,-100%);transition:opacity .1s;white-space:normal;z-index:99;max-width:320px}
+  .tip b{font-size:17px}.tip .o{color:#9db0e6}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 20px;text-align:center}
+  .stat .l{font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--gray);margin-bottom:9px}
+  .stat .v{font-size:34px;font-weight:900;line-height:1}
+  .stat .s{font-size:14px;color:var(--gray);margin-top:7px}
+  .pairgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .paircard{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px 24px}
+  .paircard .pl{font-size:15px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.04em;margin-bottom:14px}
+  .paircard .prow{display:flex;align-items:baseline;gap:12px}
+  .paircard .from{font-size:24px;color:var(--gray);font-weight:700}
+  .paircard .arrow{font-size:20px;color:var(--gray)}
+  .paircard .to{font-size:32px;font-weight:900}
+  .paircard .delta{margin-top:8px;font-size:15px;font-weight:700}
+  .delta.up{color:var(--green)}.delta.down{color:var(--red)}
+  .hl{background:#EAF1FB;border:1px solid #BFD4F2;border-radius:16px;padding:22px 26px;font-size:19px;line-height:1.6;color:var(--ink)}
+  .hl.pink{background:rgba(233,30,99,.05);border-color:#F6C6D2}
+  .hl.amber{background:rgba(224,169,44,.08);border-color:#F0DBA2}
+  .hl.green{background:rgba(30,158,90,.07);border-color:#B9E4CB}
+  .hl b{color:var(--navy)}
+  .hint{display:inline-block;margin-top:16px;font-size:14px;color:var(--gray);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 16px;cursor:default}
+  .dots{position:fixed;right:30px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:11px;z-index:60}
+  .dot{width:11px;height:11px;border-radius:50%;background:#c3cbe0;border:none;cursor:pointer;transition:.2s;padding:0}
+  .dot:hover{background:#8b96bd;transform:scale(1.2)}
+  .dot.on{background:var(--pink);transform:scale(1.35)}
+  /* donut */
+  .mixwrap{display:flex;gap:50px;align-items:center}
+  .donut{position:relative;width:280px;height:280px;flex-shrink:0}.donut svg{transform:rotate(-90deg)}
+  .dseg{fill:none;stroke-width:34;cursor:pointer;transition:stroke-width .2s,opacity .2s}
+  .dc{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;pointer-events:none;text-align:center}
+  .dc .l{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray)}
+  .dc .v{font-size:30px;font-weight:900;margin-top:5px}
+  .leg{display:flex;flex-direction:column;gap:9px;flex:1}
+  .lg{display:flex;align-items:center;gap:12px;font-size:18px;cursor:pointer;padding:8px 12px;border-radius:11px;border:1px solid transparent;font-weight:600}
+  .lg:hover{background:var(--card);border-color:var(--line)}.lg .sw{width:16px;height:16px;border-radius:5px;flex-shrink:0}.lg .p{margin-left:auto;font-weight:900}
+  .gapnote{margin-top:16px;font-size:14px;color:var(--gray);font-style:italic;line-height:1.5}
+  .flaglist{display:flex;flex-direction:column;gap:14px}
+  .flag{display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px}
+  .flag.hot{border-color:#F0B8C8;background:rgba(233,30,99,.03)}
+  .flag .fi{width:34px;height:34px;border-radius:10px;background:rgba(224,169,44,.15);color:var(--amber);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;flex-shrink:0}
+  .flag.hot .fi{background:rgba(233,30,99,.15);color:var(--pink)}
+  .flag .ft{font-size:17px;line-height:1.55;color:var(--ink)}.flag .ft b{color:var(--navy)}
+  .gaplist{display:flex;flex-direction:column;gap:12px}
+  .gapitem{display:flex;gap:14px;align-items:flex-start;font-size:17px;line-height:1.55;color:var(--ink)}
+  .gapitem .gn{width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+  .gapitem .gn.ok{background:var(--green)}
+  .gapitem b{color:var(--navy)}
+  .tagchip{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.05em;padding:3px 9px;border-radius:999px;margin-right:8px;vertical-align:1px}
+  .tagchip.res{background:rgba(30,158,90,.14);color:var(--green)}
+  .tagchip.new{background:rgba(233,30,99,.13);color:var(--pink)}
+  /* sku explorer */
+  .sku-list{display:flex;flex-direction:column;gap:9px}
+  .sku{display:flex;align-items:center;gap:16px;padding:15px 20px;border:1px solid var(--line);border-radius:14px;cursor:pointer;transition:.15s;background:#fff}
+  .sku:hover{background:var(--card)}.sku.sel{border-color:var(--navy);background:#f0f3fb}
+  .sku .nm{font-size:16px;font-weight:800;min-width:190px}
+  .sku .track{flex:1;height:16px;background:#EEF1F6;border-radius:8px;overflow:hidden}
+  .sku .fill{height:100%;background:var(--navy);width:0;transition:width .7s cubic-bezier(.22,1,.36,1)}
+  .sku .g{font-size:16px;font-weight:800;color:var(--navy);min-width:100px;text-align:right}
+  .skuDetail{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 22px}
+  .stack{display:flex;height:40px;border-radius:10px;overflow:hidden;margin:12px 0 14px}
+  .stack div{transition:width .6s ease}
+  .chips{display:flex;flex-wrap:wrap;gap:9px}
+  .chip{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:10px;padding:7px 12px}
+  .chip .sw{width:14px;height:14px;border-radius:4px;border:1px solid rgba(0,0,0,.08)}
+  /* ad campaign proof cards */
+  .adgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .adcard{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 20px;cursor:pointer;transition:.15s}
+  .adcard:hover{border-color:var(--navy);transform:translateY(-2px);box-shadow:0 10px 24px rgba(30,39,97,.1)}
+  .adcard .an{font-size:15px;font-weight:800;color:var(--navy);margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
+  .adcard .an .zoom{font-size:11px;color:var(--gray);font-weight:600}
+  .adcard .arow{display:flex;justify-content:space-between;font-size:14px;color:var(--ink);padding:5px 0;border-top:1px solid var(--line)}
+  .adcard .arow b{color:var(--navy)}
+  .adcard .roas{font-size:26px;font-weight:900;margin-top:8px}
+  /* winning ad thumb cards */
+  .winwrap{display:flex;gap:24px}
+  .wincard{flex:1;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 10px 26px rgba(30,39,97,.08)}
+  .wincard.top{border:2px solid var(--pink)}
+  .wincard .thumb{position:relative;cursor:pointer;background:#111}
+  .wincard .thumb img{width:100%;display:block;max-height:340px;object-fit:cover}
+  .wincard .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(20,26,66,.18);transition:background .2s}
+  .wincard:hover .play{background:rgba(20,26,66,.3)}
+  .wincard .pbtn{width:62px;height:62px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+  .wincard .pbtn::after{content:"";margin-left:5px;border-left:20px solid #E91E63;border-top:13px solid transparent;border-bottom:13px solid transparent}
+  .wincard .stitlecard{position:absolute;left:0;bottom:0;right:0;padding:12px 16px;background:linear-gradient(0deg,rgba(15,20,50,.92),transparent);color:#fff;font-size:13px;font-weight:700}
+  .wincard .body{padding:16px 18px}
+  .wincard .nm{font-size:15px;font-weight:800;color:var(--navy);margin-bottom:8px}
+  .wincard .row{display:flex;justify-content:space-between;font-size:14px;padding:4px 0}
+  .wincard .row b{color:var(--navy)}
+  .wincard .badge{display:inline-block;background:var(--pink);color:#fff;font-size:11px;font-weight:800;letter-spacing:.04em;padding:4px 10px;border-radius:999px;margin-bottom:8px}
+  /* image lightbox (zoom+pan) */
+  .imglb{position:fixed;inset:0;background:rgba(10,14,38,.92);display:none;align-items:center;justify-content:center;z-index:300;flex-direction:column}
+  .imglb.open{display:flex}
+  .imglbstage{position:relative;width:92vw;height:80vh;overflow:hidden;display:flex;align-items:center;justify-content:center;touch-action:none;cursor:grab}
+  .imglbstage.zoomed{cursor:grab}
+  .imglbstage img{max-width:92vw;max-height:80vh;user-select:none;pointer-events:none;transform-origin:0 0;will-change:transform}
+  .imglbcap{color:#dbe2f7;font-size:15px;margin-top:16px;font-weight:600;text-align:center;max-width:80vw}
+  .imglbclose{position:absolute;top:22px;right:26px;width:44px;height:44px;border-radius:50%;background:#fff;border:none;cursor:pointer;font-size:22px;font-weight:700;color:var(--navy);box-shadow:0 6px 18px rgba(0,0,0,.3);z-index:2;line-height:1;display:flex;align-items:center;justify-content:center}
+  .imglbtools{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:2}
+  .imglbtools button{width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:19px;font-weight:800;cursor:pointer}
+  .imglbtools button:hover{background:rgba(255,255,255,.24)}
+  .imglbhint{position:absolute;top:26px;left:26px;color:#dbe2f7;font-size:13px;font-weight:600;background:rgba(255,255,255,.1);padding:8px 14px;border-radius:999px;z-index:2}
+  @media(max-width:900px){
+    .deck{scroll-snap-type:none}
+    .panel{min-height:auto;padding:44px 22px;justify-content:flex-start}
+    .inner{max-width:100%}
+    .split{flex-direction:column;gap:26px;align-items:stretch}
+    .sinfo{width:100%}.sview{width:100%}
+    .ctitle{font-size:46px}.cperiod{font-size:22px}.cmeta{font-size:16px}.cscroll{display:none}
+    .stitle{font-size:30px}.snum{font-size:16px}.sdesc{font-size:18px}
+    .mhead{margin-bottom:26px}.mhead .t{font-size:30px}.mhead .k{font-size:15px}
+    .mgrid{grid-template-columns:repeat(2,1fr);gap:14px}
+    .mcard{padding:22px 20px}.mcard .v{font-size:34px}.mcard .l{font-size:13px}
+    .stats{grid-template-columns:repeat(2,1fr)}.stat{padding:18px 14px}.stat .v{font-size:26px}
+    .pairgrid{grid-template-columns:1fr}
+    .mixwrap{flex-direction:column;gap:24px}
+    .adgrid{grid-template-columns:1fr}
+    .winwrap{flex-direction:column}
+    .dots{display:none}
+  }
+  @media(max-width:600px){
+    .panel{padding:34px 16px}
+    .ctitle{font-size:34px}.cperiod{font-size:19px}.cmeta{font-size:15px}
+    .stitle{font-size:24px}.sdesc{font-size:16px}
+    .mhead .t{font-size:24px}.mhead .k{font-size:13px}
+    .mgrid{grid-template-columns:1fr}.mcard .v{font-size:30px}
+    .stats{grid-template-columns:1fr!important}.stat .v{font-size:24px}
+    .hl{font-size:16px;padding:16px 18px}
+    .donut{width:210px;height:210px}
+    .sku .nm{min-width:120px;font-size:14px}.sku .g{min-width:80px;font-size:14px}
+  }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+  <!-- p0 cover -->
+  <section class="panel cover" id="p0">
+    <div class="inner">
+      <div class="ckick">HanSoul · Marketplace &amp; Off-Platform Performance</div>
+      <div class="ctitle">Shopee, TikTok &amp; Meta CPAS</div>
+      <div class="cperiod">1&ndash;17 September 2026</div>
+      <div class="cmeta">Basis GMV dibayar Shopee (Rp 80,25 Jt dari 402 pesanan) + GMV TikTok Shop (Rp 21,24 Jt) + retargeting Meta CPAS &middot; disusun dari <b>data mentah</b> (shop-stats, SKU detail, traffic overview, Ads Manager, TikTok Seller Center) &mdash; bukan lagi catatan/estimasi &middot; disusun oleh DIZCO</div>
+    </div>
+    <div class="cscroll">Scroll <span class="arw"></span></div>
+  </section>
+
+  <!-- p1 overall metrics -->
+  <section class="panel" id="p1">
+    <div class="inner">
+      <div class="mhead"><div class="k">01 &middot; RINGKASAN TOKO</div><div class="t">Overall Metrics — Shopee</div></div>
+      <div class="mgrid">
+        <div class="mcard"><div class="l">GMV Dibayar</div><div class="v navy">Rp 80,25 Jt</div><div class="s">dibuat Rp 96,72 Jt &middot; gap Rp 16,47 Jt (17,0%)</div></div>
+        <div class="mcard"><div class="l">Pesanan Dibayar</div><div class="v navy">402</div><div class="s">AOV Rp 199.627</div></div>
+        <div class="mcard"><div class="l">Dibatalkan (basis dibuat)</div><div class="v red">88 order</div><div class="s">Rp 18,52 Jt</div></div>
+        <div class="mcard"><div class="l">Pembeli Baru</div><div class="v teal">358 / 380</div><div class="s">94,2% dari total pembeli</div></div>
+        <div class="mcard"><div class="l">Repeat Rate</div><div class="v amber">5,53%</div><div class="s">masih tipis &mdash; sama kayak temuan minggu lalu</div></div>
+        <div class="mcard"><div class="l">Proyeksi Akhir Bulan</div><div class="v navy" style="font-size:36px">Rp 108–142 Jt</div><div class="s">tergantung pace dipakai &middot; target 150&ndash;200 Jt</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- p2 pace (daily) -->
+  <section class="panel" id="p2">
+    <div class="inner"><div class="split">
+      <div class="sinfo"><div class="snum">02</div><div class="stitle">Pace GMV Harian</div>
+        <div class="sdesc">GMV dibayar per hari, 1&ndash;17 Sept.<br><br>Titik tertinggi ada di <b>9 Sept</b> (Rp 11,43 Jt).<br><br>Rata-rata harian 1&ndash;8 Sept Rp 5,02 Jt, lalu 10&ndash;17 Sept Rp 3,59 Jt &mdash; 3 hari terakhir (15&ndash;17 Sept) sedikit melandai (Rp 4,14 &rarr; 3,45 &rarr; 2,71 Jt).<div class="hint">Hover bar buat GMV per tanggal</div></div></div>
+      <div class="sview"><div class="chart"><svg id="svgPaceDaily" viewBox="0 0 680 320" preserveAspectRatio="xMidYMid meet" style="width:100%;height:auto;display:block"></svg></div></div>
+    </div></div>
+  </section>
+
+  <!-- p3 gap to target -->
+  <section class="panel" id="p3">
+    <div class="inner"><div class="split">
+      <div class="sinfo"><div class="snum">03</div><div class="stitle">Gap ke Target</div>
+        <div class="sdesc">13 hari tersisa (18&ndash;30 Sept). Pace sekarang (10&ndash;17 Sept) <b>Rp 3,59 Jt/hari</b>.<br><br>Buat kejar <b>Rp 150 Jt</b> butuh naik ke <b>Rp 5,37 Jt/hari (1,50x)</b>.<br>Buat kejar <b>Rp 200 Jt</b> butuh <b>Rp 9,21 Jt/hari (2,57x)</b>.<div class="hint">Hover bar buat multiplier vs pace sekarang</div></div></div>
+      <div class="sview"><div class="chart"><svg id="svgGap" viewBox="0 0 660 220" preserveAspectRatio="xMidYMid meet" style="width:100%;height:auto;display:block"></svg></div></div>
+    </div></div>
+  </section>
+
+  <!-- p4 diagnosis -->
+  <section class="panel" id="p4">
+    <div class="inner">
+      <div class="mhead"><div class="k">04 &middot; DIAGNOSA</div><div class="t">Traffic Naik, Konversi &amp; AOV Ikut Bergeser</div></div>
+      <div class="sdesc" style="text-align:center;max-width:900px;margin:0 auto 30px">Bandingin fase 1&ndash;8 Sept vs 10&ndash;17 Sept &mdash; polanya konsisten dengan yang keliatan di data 14 hari sebelumnya:</div>
+      <div class="pairgrid">
+        <div class="paircard"><div class="pl">Kunjungan / Hari</div><div class="prow"><span class="from">2.506</span><span class="arrow">→</span><span class="to navy">2.684</span></div><div class="delta up">▲ +7,1%</div></div>
+        <div class="paircard"><div class="pl">Conversion Rate (dibayar)</div><div class="prow"><span class="from">0,91%</span><span class="arrow">→</span><span class="to red">0,72%</span></div><div class="delta down">▼ turun</div></div>
+        <div class="paircard"><div class="pl">AOV</div><div class="prow"><span class="from">Rp 220rb</span><span class="arrow">→</span><span class="to red">Rp 185rb</span></div><div class="delta down">▼ turun</div></div>
+      </div>
+      <div class="hl" style="margin-top:24px;max-width:1000px;margin-left:auto;margin-right:auto"><b>Catatan:</b> traffic naik, tapi conversion rate &amp; AOV bergerak ke arah sebaliknya.<br><br>Ini nunjukin ruang perbaikan ada di funnel depth &amp; offer mechanic (order bump/OTO), sebagai pelengkap dari upaya nambah traffic yang sudah jalan.</div>
+    </div>
+  </section>
+
+  <!-- p5 sumber penjualan -->
+  <section class="panel" id="p5">
+    <div class="inner"><div class="split">
+      <div class="sinfo"><div class="snum">05</div><div class="stitle">Sumber Penjualan (Touch)</div>
+        <div class="sdesc">Basis <b>touch</b>, bukan attribution eksklusif &mdash; 1 order bisa kesentuh &gt;1 channel, jadi total di bawah (Rp 145,5 Jt) jauh di atas GMV dibayar aktual (Rp 80,25 Jt).<br><br>Iklan masih paling dominan.<div class="hint">Hover bar buat detail</div></div></div>
+      <div class="sview"><div class="chart"><svg id="svgSumber" viewBox="0 0 660 260" preserveAspectRatio="xMidYMid meet" style="width:100%;height:auto;display:block"></svg></div></div>
+    </div></div>
+  </section>
+
+  <!-- p6 iklan shopee -->
+  <section class="panel" id="p6">
+    <div class="inner">
+      <div class="mhead"><div class="k">06 &middot; IKLAN SHOPEE</div><div class="t">3 Grup Iklan &mdash; Sekarang dengan Bukti Asli</div></div>
+      <div class="sdesc" style="max-width:1100px;margin:0 auto 20px;text-align:center">Total spend <b>Rp 19,92 Jt</b> &mdash; dua basis perhitungan ditampilkan terpisah karena dasar hitungnya beda:
+        <ul style="margin:12px auto 0;padding-left:0;list-style:none;display:grid;gap:8px;max-width:760px;text-align:left">
+          <li>&middot; <b>Basis Ads Manager</b> (klik/tayang): Penjualan <b>Rp 81,49 Jt</b>, ROAS <b>4,09x</b>.</li>
+          <li>&middot; <b>Basis Toko</b> (dibayar/touch): <b>Rp 65,21 Jt</b>, ROAS <b>3,27x</b>, TACOS <b>24,8%</b>.</li>
+        </ul>
+      <div class="hint">Klik kartu buat lihat screenshot asli</div></div>
+      <div class="adgrid">
+        <div class="adcard" onclick="openImgLB('ads_ragu_spek','Winning Product Ads1 &middot; per-SKU detail &middot; 01/09&ndash;17/09/2026')">
+          <div class="an">Winning Product Ads1 <span class="zoom">klik zoom</span></div>
+          <div class="arow"><span>Modal harian</span><b>Rp 450rb</b></div>
+          <div class="arow"><span>Biaya iklan</span><b>Rp 8,40 Jt</b></div>
+          <div class="arow"><span>Penjualan</span><b>Rp 34,19 Jt</b></div>
+          <div class="arow"><span>Top SKU</span><b>Macaron Series 5,10x</b></div>
+          <div class="roas" style="color:var(--green)">ROAS 4,07x</div>
+        </div>
+        <div class="adcard" onclick="openImgLB('ads_testing2','Group testing product 2 &middot; per-SKU detail &middot; 01/09&ndash;17/09/2026')">
+          <div class="an">Group testing product 2 <span class="zoom">klik zoom</span></div>
+          <div class="arow"><span>Modal harian</span><b>Rp 400rb</b></div>
+          <div class="arow"><span>Biaya iklan</span><b>Rp 7,57 Jt</b></div>
+          <div class="arow"><span>Penjualan</span><b>Rp 32,05 Jt</b></div>
+          <div class="arow"><span>Top SKU</span><b>Glee Series 4,72x</b></div>
+          <div class="roas" style="color:var(--green)">ROAS 4,23x</div>
+        </div>
+        <div class="adcard" onclick="openImgLB('ads_auto','Iklan Produk Otomatis (Auto-Ads) &middot; per-SKU detail &middot; 01/09&ndash;17/09/2026')">
+          <div class="an">Iklan Produk Otomatis <span class="zoom">klik zoom</span></div>
+          <div class="arow"><span>Biaya iklan</span><b>Rp 3,95 Jt</b></div>
+          <div class="arow"><span>Penjualan</span><b>Rp 15,26 Jt</b></div>
+          <div class="arow"><span>Winner</span><b>Play Tumbler 5,03x</b></div>
+          <div class="arow"><span>0 konversi</span><b>Leisure 830</b></div>
+          <div class="roas" style="color:var(--amber)">ROAS 3,86x <span style="font-size:13px;color:var(--gray);font-weight:600">(target 4)</span></div>
+        </div>
+      </div>
+      <div class="gapnote" style="text-align:center;margin-top:16px">Klik <span onclick="openImgLB('ads_overview','Ringkasan Iklan Produk &middot; 01/09&ndash;17/09/2026')" style="cursor:pointer;text-decoration:underline;color:var(--navy);font-weight:700">di sini</span> buat lihat screenshot ringkasan keseluruhan.</div>
+    </div>
+  </section>
+
+  <!-- p7 SKU explorer -->
+  <section class="panel" id="p7">
+    <div class="inner"><div class="split">
+      <div class="sinfo"><div class="snum">07</div><div class="stitle">SKU Explorer — Warna/Varian</div>
+        <div class="sdesc"><b>Magnetic Ceramic Series</b> tetap SKU #1 (Rp 24,54 Jt, 80 pcs).<br><br><b>Black &amp; Ivory 1.2L</b> mendominasi warna. Klik SKU lain buat lihat breakdown warnanya.<div class="hint">Klik nama SKU buat ganti breakdown</div></div></div>
+      <div class="sview">
+        <div class="sku-list" id="skuList"></div>
+        <div class="skuDetail" id="skuDetail"></div>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- p8 SKU gap dibuat vs dibayar -->
+  <section class="panel" id="p8">
+    <div class="inner"><div class="split">
+      <div class="sinfo"><div class="snum">08</div><div class="stitle">SKU — Gap Dibuat vs Dibayar</div>
+        <div class="sdesc"><b>Gradient 1,2L punya gap paling besar &mdash; 30,4%</b> &mdash; konsisten dengan angka periode sebelumnya (30,5%), jadi kemungkinan besar bukan fluktuasi acak.<br><br>Penyebabnya (stok/varian vs sekadar belum bayar) masih perlu dicek langsung.<div class="hint">Hover bar buat angka detail</div></div></div>
+      <div class="sview"><div class="chart"><svg id="svgSkuGap" viewBox="0 0 660 280" preserveAspectRatio="xMidYMid meet" style="width:100%;height:auto;display:block"></svg></div></div>
+    </div></div>
+  </section>
+
+  <!-- p9 affiliate -->
+  <section class="panel" id="p9">
+    <div class="inner">
+      <div class="mhead"><div class="k">09 &middot; AFFILIATE</div><div class="t">Rp 33,7 Jt &mdash; Naik 71% MoM</div></div>
+      <div class="mixwrap" style="max-width:1400px;margin:0 auto">
+        <div style="flex:1">
+          <div class="stats" style="margin-bottom:18px">
+            <div class="stat"><div class="l">Penjualan</div><div class="v green">Rp 33,7 Jt</div><div class="s">+70,93% vs periode lalu</div></div>
+            <div class="stat"><div class="l">Pesanan</div><div class="v navy">175</div><div class="s">+62,04%</div></div>
+            <div class="stat"><div class="l">ROI</div><div class="v amber">20x</div><div class="s">+9,69%</div></div>
+            <div class="stat"><div class="l">Pembeli Baru</div><div class="v teal">157 / 170</div><div class="s">92,4% dari pembeli</div></div>
+          </div>
+          <div style="font-size:15px;color:var(--ink);line-height:1.6">
+            <p style="margin:0 0 12px"><b style="color:var(--navy)">Top Affiliate:</b> Nova Junis (Rp 4,85 Jt), Shilky Store (Rp 4,40 Jt), Shopee Media Network (Rp 2,76 Jt).</p>
+            <p style="margin:0"><b style="color:var(--navy)">Top Produk:</b> Magnetic Ceramic 900 (Rp 10,01 Jt/39 terjual), Mini Travel Tumbler (Rp 8,15 Jt/71 terjual).</p>
+          </div>
+        </div>
+        <div class="donut">
+          <svg viewBox="0 0 200 200" id="svgAffMix"></svg>
+          <div class="dc"><div class="l" id="affLab">Top Platform</div><div class="v" id="affVal" style="color:#1E2761">39,4%</div></div>
+        </div>
+        <div class="leg" id="affLeg"></div>
+      </div>
+      <div class="gapnote" style="text-align:center;margin-top:14px">*CSV performa affiliate (Rp 33.671.945/101 akun) sekarang <b style="color:var(--green);font-style:normal">match persis</b> sama dashboard Metrik Utama (Rp 33,7 Jt) &mdash; nggak ada lagi selisih basis kayak sebelumnya.</div>
+    </div>
+  </section>
+
+  <!-- p10 top 4 winning affiliate content framework -->
+  <section class="panel" id="p10">
+    <div class="inner">
+      <div class="mhead"><div class="k">10 &middot; KONTEN AFFILIATE</div><div class="t">Top 4 Winning Affiliate — Apa yang Bikin Efektif</div></div>
+      <div class="sdesc" style="max-width:1100px;margin:0 auto 20px;text-align:center">Peringkat berdasarkan <b>GMV per 1.000 views</b> (efisiensi konten), bukan omzet mentah &mdash; data per 15 September 2026.</div>
+      <div style="overflow-x:auto;max-width:1300px;margin:0 auto">
+      <table style="width:100%;border-collapse:collapse;font-size:15px">
+        <thead><tr style="border-bottom:2px solid var(--navy)">
+          <th style="text-align:left;padding:10px 12px;color:var(--gray);font-size:13px;text-transform:uppercase">#</th>
+          <th style="text-align:left;padding:10px 12px;color:var(--gray);font-size:13px;text-transform:uppercase">Kreator</th>
+          <th style="text-align:left;padding:10px 12px;color:var(--gray);font-size:13px;text-transform:uppercase">SKU</th>
+          <th style="text-align:right;padding:10px 12px;color:var(--gray);font-size:13px;text-transform:uppercase">Views</th>
+          <th style="text-align:right;padding:10px 12px;color:var(--gray);font-size:13px;text-transform:uppercase">GMV Video</th>
+          <th style="text-align:right;padding:10px 12px;color:var(--gray);font-size:13px;text-transform:uppercase">GMV/1rb Views</th>
+          <th style="text-align:left;padding:10px 12px;color:var(--gray);font-size:13px;text-transform:uppercase">Video</th>
+        </tr></thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--line);background:rgba(233,30,99,.04)"><td style="padding:10px 12px;font-weight:900;color:var(--pink)">1</td><td style="padding:10px 12px;font-weight:700">Nova Junis</td><td style="padding:10px 12px">Magnetic 1,2L</td><td style="padding:10px 12px;text-align:right">23rb</td><td style="padding:10px 12px;text-align:right;font-weight:700">Rp 7,5 Jt</td><td style="padding:10px 12px;text-align:right;font-weight:900;color:var(--pink)">Rp 324rb</td><td style="padding:10px 12px"><span onclick="openDriveLB('1S9wGpZ91DwzarCQ2iZFTRPdhiKdf3ubJ','Nova Junis — Magnetic 1,2L')" style="cursor:pointer;color:var(--navy);font-weight:700;text-decoration:underline">▶ Putar</span></td></tr>
+          <tr style="border-bottom:1px solid var(--line)"><td style="padding:10px 12px;font-weight:900;color:var(--gray)">2</td><td style="padding:10px 12px;font-weight:700">Red Joja</td><td style="padding:10px 12px">Gradient 1,2L</td><td style="padding:10px 12px;text-align:right">7,7rb</td><td style="padding:10px 12px;text-align:right;font-weight:700">Rp 1,9 Jt</td><td style="padding:10px 12px;text-align:right;font-weight:900">Rp 250rb</td><td style="padding:10px 12px"><span onclick="openDriveLB('11QUNvjoTJ_sZ2E5AdqzLEy8z6G37Y6bF','Red Joja — Gradient 1,2L')" style="cursor:pointer;color:var(--navy);font-weight:700;text-decoration:underline">▶ Putar</span></td></tr>
+          <tr style="border-bottom:1px solid var(--line)"><td style="padding:10px 12px;font-weight:900;color:var(--gray)">3</td><td style="padding:10px 12px;font-weight:700">Mom.ashbimh</td><td style="padding:10px 12px">Gradient 750</td><td style="padding:10px 12px;text-align:right">2,9rb</td><td style="padding:10px 12px;text-align:right;font-weight:700">Rp 502rb</td><td style="padding:10px 12px;text-align:right;font-weight:900">Rp 174rb</td><td style="padding:10px 12px"><span onclick="openDriveLB('1EC3HR-mTB-lSBvhy6EnCIyPmqXOvr1gQ','Mom.ashbimh — Gradient 750')" style="cursor:pointer;color:var(--navy);font-weight:700;text-decoration:underline">▶ Putar</span></td></tr>
+          <tr style="border-bottom:1px solid var(--line)"><td style="padding:10px 12px;font-weight:900;color:var(--gray)">4</td><td style="padding:10px 12px;font-weight:700">Niningyunika</td><td style="padding:10px 12px">Gradient 1,2L</td><td style="padding:10px 12px;text-align:right">8,2rb</td><td style="padding:10px 12px;text-align:right;font-weight:700">Rp 881rb</td><td style="padding:10px 12px;text-align:right;font-weight:900">Rp 108rb</td><td style="padding:10px 12px"><span onclick="openDriveLB('1wXFBpeF518I8hVGzsNCAXUGdbjJpq_Qk','Niningyunika — Gradient 1,2L')" style="cursor:pointer;color:var(--navy);font-weight:700;text-decoration:underline">▶ Putar</span></td></tr>
+          <tr style="color:var(--gray)"><td style="padding:10px 12px;font-style:italic">pembanding</td><td style="padding:10px 12px">Momins</td><td style="padding:10px 12px">Mini Travel</td><td style="padding:10px 12px;text-align:right">25rb</td><td style="padding:10px 12px;text-align:right">Rp 1 Jt</td><td style="padding:10px 12px;text-align:right">Rp 41rb</td><td style="padding:10px 12px"><span onclick="openDriveLB('1kE2zA2h6Sa-3JXEPNzpk9ad_EEHn6XiX','Momins — Mini Travel (pembanding)')" style="cursor:pointer;color:var(--gray);font-weight:700;text-decoration:underline">▶ Putar</span></td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="hl" style="max-width:1100px;margin:22px auto 0">
+        <b>Pola yang muncul dari 4 winner ini:</b>
+        <ul style="margin:12px 0 0;padding-left:22px;display:grid;gap:10px">
+          <li>79% nunjukin intip bagian dalam produk (lapisan keramik, "nggak bau besi") dan 76% ada unboxing.</li>
+          <li>Rangka umum: cover &rarr; unboxing &rarr; intip dalam &rarr; tur fitur &rarr; bukti fisik &rarr; penutup.</li>
+          <li>CTA yang paling sering dipakai: &ldquo;samaan yuk / kembaran yuk&rdquo;.</li>
+          <li>Like &amp; komentar bukan indikator GMV &mdash; Nova Junis cuma 20 like tapi Rp 7,5 Jt, sementara Momins (views tertinggi) justru GMV/views-nya paling rendah.</li>
+        </ul>
+      </div>
+      <div class="gapnote" style="text-align:center;margin-top:12px">Semua sampel di atas adalah video winner (belum ada pembanding video yang kurang berhasil). Detail lengkap &amp; folder video/screenshot: <a href="https://claude.ai/code/artifact/4a5a3e7a-11ca-4a2c-bee9-fc14440887c6" target="_blank" style="color:var(--navy);font-weight:700">Doc lengkap ↗</a> &middot; <a href="https://drive.google.com/drive/folders/1O-TxFcM254Xjw593Q9uzHdH5sxhkTSZo" target="_blank" style="color:var(--navy);font-weight:700">Folder Drive ↗</a></div>
+    </div>
+  </section>
+
+  <!-- p11 external platform traffic -->
+  <section class="panel" id="p11">
+    <div class="inner"><div class="split">
+      <div class="sinfo"><div class="snum">11</div><div class="stitle">External Platform — Sinyal CPAS Mulai Kerja</div>
+        <div class="sdesc">Traffic dari luar Shopee (10&ndash;16 Sept vs 7 hari sebelumnya) <b>naik tajam di semua metrik</b> &mdash; penjualan +554,79%.<br><br>Ini konsisten dengan mulai jalannya Meta CPAS retargeting (lihat panel berikutnya).</div>
+        <div class="stats" style="margin-top:18px;grid-template-columns:repeat(2,1fr)">
+        <div class="stat"><div class="l">Pengunjung</div><div class="v navy">871</div><div class="s">▲ +61,00%</div></div>
+        <div class="stat"><div class="l">Nilai ATC</div><div class="v navy">Rp 24,1 Jt</div><div class="s">▲ +132,25%</div></div>
+        <div class="stat"><div class="l">Pembeli</div><div class="v green">11</div><div class="s">▲ +450,00%</div></div>
+        <div class="stat"><div class="l">Penjualan</div><div class="v green">Rp 2,30 Jt</div><div class="s">▲ +554,79%</div></div>
+        </div>
+        <div class="gapnote" style="margin-top:14px">Funnel: Kunjungan&rarr;ATC 9,87% &middot; ATC&rarr;Pesanan Dibuat 12,79% &middot; Pesanan Dibuat/Kunjungan 1,26%.</div>
+      </div>
+      <div class="sview"><img src="" data-imgkey="traffic_external" alt="External Platform traffic report" style="width:100%;border-radius:16px;border:1px solid var(--line);box-shadow:0 12px 34px rgba(30,39,97,.1);cursor:zoom-in" onclick="openImgLB('traffic_external','External Platform traffic report &middot; 10&ndash;16 September 2026')"></div>
+    </div></div>
+  </section>
+
+  <!-- p12 Meta CPAS -->
+  <section class="panel" id="p12">
+    <div class="inner">
+      <div class="mhead"><div class="k">12 &middot; META CPAS</div><div class="t">Retargeting &mdash; 1 Video Ad Jadi Sorotan</div></div>
+      <div class="sdesc" style="max-width:1100px;margin:0 auto 22px;text-align:center">Campaign <b>"New RETARGETING ADS &mdash; onRule"</b> (ad set "Standard &ndash; IC 7D &ndash; ATC 14D&hellip;", sesuai SOP Brief CPAS 4-Fase):
+        <ul style="margin:12px auto 0;padding-left:0;list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:8px 26px">
+          <li>Spend <b>Rp 841.772</b></li>
+          <li>27 purchases</li>
+          <li>Konversi <b>Rp 4,87 Jt</b></li>
+          <li>ROAS <b>5,79x</b></li>
+        </ul>
+      </div>
+      <div class="winwrap" style="max-width:1200px;margin:0 auto">
+        <div class="wincard top">
+          <div class="thumb" onclick="openVidLB()"><img src="" data-imgkey="vid_thumb_baunempel" alt="11SEP_VID_RT_L3_BauNempel"><div class="play"><div class="pbtn"></div></div><div class="stitlecard">▶ Klik buat putar video asli</div></div>
+          <div class="body">
+            <div class="badge">🏆 WINNING AD</div>
+            <div class="nm">11SEP_VID_RT_L3_BauNempel</div>
+            <div class="row"><span>Spend</span><b>Rp 117.428</b></div>
+            <div class="row"><span>Purchases</span><b>7</b></div>
+            <div class="row"><span>Conversion Value</span><b>Rp 926.100</b></div>
+            <div class="row"><span>ROAS</span><b style="color:var(--pink);font-size:19px">7,89x</b></div>
+          </div>
+        </div>
+        <div class="wincard">
+          <div class="thumb" onclick="openImgLB('product_magnetic','Creative pendamping &mdash; HanSoul Magnetic Ceramic Series (produk yang di-retargeting)')"><img src="" data-imgkey="product_magnetic" alt="RaguSpek"><div class="play"><div class="pbtn"></div></div><div class="stitlecard">🖼 Klik buat zoom creative</div></div>
+          <div class="body">
+            <div class="badge" style="background:var(--navy)">ROAS TERTINGGI KEDUA</div>
+            <div class="nm">11SEP_RT_L4_RaguSpek</div>
+            <div class="row"><span>Spend</span><b>Rp 399.156</b></div>
+            <div class="row"><span>Purchases</span><b>15</b></div>
+            <div class="row"><span>Conversion Value</span><b>Rp 2.688.700</b></div>
+            <div class="row"><span>ROAS</span><b style="color:var(--green);font-size:19px">6,74x</b></div>
+          </div>
+        </div>
+      </div>
+      <div class="gapnote" style="text-align:center;margin-top:14px">2 ad ini menyumbang 61% spend dan 81% purchases dari campaign yang berjalan. Klik <span onclick="openImgLB('meta_campaigns','Meta Ads Manager &mdash; Campaign overview')" style="cursor:pointer;text-decoration:underline;color:var(--navy);font-weight:700">di sini</span> untuk screenshot campaign / <span onclick="openImgLB('meta_ads_detail','Meta Ads Manager &mdash; Ad-level breakdown')" style="cursor:pointer;text-decoration:underline;color:var(--navy);font-weight:700">di sini</span> untuk ad-level.</div>
+    </div>
+  </section>
+
+  <!-- p13 TikTok overview -->
+  <section class="panel" id="p13">
+    <div class="inner">
+      <div class="mhead"><div class="k">13 &middot; TIKTOK SHOP</div><div class="t">Overall Metrics — TikTok Shop</div></div>
+      <div class="sdesc" style="max-width:1000px;margin:0 auto 30px;text-align:center">Skala TikTok masih lebih kecil dari Shopee (Rp 21,24 Jt vs Rp 80,25 Jt dibayar).<br><br>Tapi growth rate-nya secara persentase lebih tinggi di hampir semua metrik &mdash; tanda channel ini masih di fase awal dan masih ada ruang tumbuh.</div>
+      <div class="mgrid">
+        <div class="mcard"><div class="l">GMV</div><div class="v navy">Rp 21,24 Jt</div><div class="s">▲ +54,68% vs periode lalu</div></div>
+        <div class="mcard"><div class="l">Pesanan</div><div class="v navy">141</div><div class="s">▲ +74,07%</div></div>
+        <div class="mcard"><div class="l">Pembeli</div><div class="v teal">139</div><div class="s">▲ +78,21%</div></div>
+        <div class="mcard"><div class="l">Produk Terjual</div><div class="v navy">151</div><div class="s">▲ +69,66%</div></div>
+        <div class="mcard"><div class="l">AOV</div><div class="v amber">Rp 141.611</div><div class="s">▼ -10,29% &mdash; mix bergeser ke SKU lebih murah (Mini Cup)</div></div>
+        <div class="mcard"><div class="l">Conversion Rate</div><div class="v green">1,25%</div><div class="s">▲ +10,33%</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- p14 TikTok pace GMV video harian -->
+  <section class="panel" id="p14">
+    <div class="inner"><div class="split">
+      <div class="sinfo"><div class="snum">14</div><div class="stitle">Pace GMV Video Harian</div>
+        <div class="sdesc">GMV dari channel <b>video</b> (afiliasi + toko) per hari, 1&ndash;16 Sept &mdash; channel dominan, 64,5% dari total GMV TikTok.<br><br>Akselerasi jelas mulai <b>10 Sept</b>: dari kisaran Rp 400&ndash;900rb/hari (1&ndash;9 Sept) naik ke Rp 1&ndash;1,84 Jt/hari (10&ndash;16 Sept), puncaknya <b>14 Sept</b> (Rp 1,84 Jt).<div class="hint">Hover bar buat GMV video per tanggal</div></div></div>
+      <div class="sview"><div class="chart"><svg id="svgTiktokPace" viewBox="0 0 680 320" preserveAspectRatio="xMidYMid meet" style="width:100%;height:auto;display:block"></svg></div></div>
+    </div></div>
+  </section>
+
+  <!-- p15 TikTok sumber GMV -->
+  <section class="panel" id="p15">
+    <div class="inner">
+      <div class="mhead"><div class="k">15 &middot; SUMBER GMV TIKTOK</div><div class="t">Video Afiliasi Mendominasi</div></div>
+      <div class="mixwrap" style="max-width:1400px;margin:0 auto">
+        <div class="donut">
+          <svg viewBox="0 0 200 200" id="svgTiktokSrc"></svg>
+          <div class="dc"><div class="l" id="ttSrcLab">Total GMV</div><div class="v" id="ttSrcVal" style="color:#1E2761">Rp 21,24 Jt</div></div>
+        </div>
+        <div class="leg" id="ttSrcLeg"></div>
+      </div>
+      <div class="gapnote" style="text-align:center;margin-top:16px">Basis: dashboard Analitik Toko TikTok Seller Center (Detail GMV &middot; berdasarkan sumber pesanan), 1&ndash;17 Sept 2026. Afiliasi (kreator) total 84,0%, akun toko sendiri 16,0%.</div>
+    </div>
+  </section>
+
+  <!-- p16 TikTok top affiliate -->
+  <section class="panel" id="p16">
+    <div class="inner">
+      <div class="mhead"><div class="k">16 &middot; AFFILIATE TIKTOK</div><div class="t">Top 5 Creator — Rp 16,2 Jt dari 45 Creator Aktif</div></div>
+      <div class="sdesc" style="max-width:1100px;margin:0 auto 20px;text-align:center">Basis GMV per creator, 1&ndash;15 Sept 2026 &mdash; 45 dari total creator terhubung yang menghasilkan penjualan.</div>
+      <div style="overflow-x:auto;max-width:1300px;margin:0 auto">
+      <table style="width:100%;border-collapse:collapse;font-size:15px">
+        <thead><tr style="border-bottom:2px solid var(--navy)">
+          <th style="text-align:left;padding:10px 12px;color:var(--gray);font-size:13px;text-transform:uppercase">#</th>
+          <th style="text-align:left;padding:10px 12px;color:var(--gray);font-size:13px;text-transform:uppercase">Creator</th>
+          <th style="text-align:right;padding:10px 12px;color:var(--gray);font-size:13px;text-transform:uppercase">GMV</th>
+          <th style="text-align:right;padding:10px 12px;color:var(--gray);font-size:13px;text-transform:uppercase">Pesanan</th>
+          <th style="text-align:right;padding:10px 12px;color:var(--gray);font-size:13px;text-transform:uppercase">Tayangan Video</th>
+          <th style="text-align:left;padding:10px 12px;color:var(--gray);font-size:13px;text-transform:uppercase">Video</th>
+        </tr></thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--line);background:rgba(233,30,99,.04)"><td style="padding:10px 12px;font-weight:900;color:var(--pink)">1</td><td style="padding:10px 12px;font-weight:700">bimspillbim</td><td style="padding:10px 12px;text-align:right;font-weight:900;color:var(--pink)">Rp 2,66 Jt</td><td style="padding:10px 12px;text-align:right">26</td><td style="padding:10px 12px;text-align:right">44.163</td><td style="padding:10px 12px"><span onclick="openDriveLB('1t9AHB0DWUPVDdu-Svh4dnoaSAHQyrz90','bimspillbim &middot; top creator TikTok')" style="cursor:pointer;color:var(--navy);font-weight:700;text-decoration:underline">▶ Putar</span></td></tr>
+          <tr style="border-bottom:1px solid var(--line)"><td style="padding:10px 12px;font-weight:900;color:var(--gray)">2</td><td style="padding:10px 12px;font-weight:700">mother_twochild</td><td style="padding:10px 12px;text-align:right;font-weight:900">Rp 1,11 Jt</td><td style="padding:10px 12px;text-align:right">10</td><td style="padding:10px 12px;text-align:right">12.792</td><td style="padding:10px 12px"><span onclick="openDriveLB('1gp-hLzFJcy5CODqyOJvTsiHju5S1ViRL','mother_twochild &middot; top creator TikTok')" style="cursor:pointer;color:var(--navy);font-weight:700;text-decoration:underline">▶ Putar</span></td></tr>
+          <tr style="border-bottom:1px solid var(--line)"><td style="padding:10px 12px;font-weight:900;color:var(--gray)">3</td><td style="padding:10px 12px;font-weight:700">shen.liu79</td><td style="padding:10px 12px;text-align:right;font-weight:900">Rp 1,03 Jt</td><td style="padding:10px 12px;text-align:right">2</td><td style="padding:10px 12px;text-align:right">0</td><td style="padding:10px 12px;color:var(--gray);font-style:italic">kartu produk</td></tr>
+          <tr style="border-bottom:1px solid var(--line)"><td style="padding:10px 12px;font-weight:900;color:var(--gray)">4</td><td style="padding:10px 12px;font-weight:700">theras.space</td><td style="padding:10px 12px;text-align:right;font-weight:900">Rp 944rb</td><td style="padding:10px 12px;text-align:right">3</td><td style="padding:10px 12px;text-align:right">6.377</td><td style="padding:10px 12px"><span onclick="openDriveLB('1M3rt8_win052NGi-FSdUGi_A4czfk7Gy','theras.space &middot; top creator TikTok')" style="cursor:pointer;color:var(--navy);font-weight:700;text-decoration:underline">▶ Putar</span></td></tr>
+          <tr style="border-bottom:1px solid var(--line)"><td style="padding:10px 12px;font-weight:900;color:var(--gray)">5</td><td style="padding:10px 12px;font-weight:700">wangyexv22x</td><td style="padding:10px 12px;text-align:right;font-weight:900">Rp 865rb</td><td style="padding:10px 12px;text-align:right">2</td><td style="padding:10px 12px;text-align:right">0</td><td style="padding:10px 12px;color:var(--gray);font-style:italic">kartu produk</td></tr>
+          <tr style="color:var(--gray)"><td style="padding:10px 12px;font-style:italic">bonus</td><td style="padding:10px 12px">syabii.house</td><td style="padding:10px 12px;text-align:right">Rp 805rb</td><td style="padding:10px 12px;text-align:right">7</td><td style="padding:10px 12px;text-align:right">7.157</td><td style="padding:10px 12px"><span onclick="openDriveLB('1PgNJ0y1GefA3hKEUYi0aRj-1xVT9BytQ','syabii.house &middot; bonus, rank 6')" style="cursor:pointer;color:var(--gray);font-weight:700;text-decoration:underline">▶ Putar</span></td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="hl" style="max-width:1100px;margin:22px auto 0">
+        <b>Beberapa catatan dari top 5 creator ini:</b>
+        <ul style="margin:12px 0 0;padding-left:22px;display:grid;gap:10px">
+          <li><b>bimspillbim</b> sendiri menyumbang 16,4% dari total GMV affiliate (Rp 2,66 Jt dari Rp 16,2 Jt) &mdash; lewat video, bisa langsung ditonton di tabel di atas.</li>
+          <li><b>shen.liu79</b> dan <b>wangyexv22x</b> nggak ada video sample &mdash; GMV-nya kemungkinan lewat kartu produk di profil, bukan konten aktif, jadi belum ada yang bisa diputar.</li>
+          <li>Ditambahin 1 video bonus (<b>syabii.house</b>, rank 6) karena kontennya juga tersedia &mdash; buat referensi tambahan di luar top 5.</li>
+          <li>Belum ada creator TikTok HanSoul yang skalanya sebanding sama winning affiliate Shopee (Nova Junis dkk) &mdash; masih ruang buat cari & seeding creator yang lebih besar.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- p17 TikTok GMV Max ads -->
+  <section class="panel" id="p17">
+    <div class="inner"><div class="split">
+      <div class="sinfo"><div class="snum">17</div><div class="stitle">TikTok Ads — GMV Max</div>
+        <div class="sdesc">Total biaya <b>Rp 7,36 Jt</b>, 151 pesanan SKU, ROI <b>3,12x</b>.<br><br>Produk dengan ROI tertinggi bukan yang paling banyak dibelanjain budget-nya.<div class="hint">Klik gambar buat lihat dashboard asli</div></div>
+        <div class="stats" style="margin-top:18px;grid-template-columns:repeat(2,1fr)">
+          <div class="stat"><div class="l">Biaya</div><div class="v navy">Rp 7,36 Jt</div></div>
+          <div class="stat"><div class="l">Pendapatan Kotor</div><div class="v green">Rp 22,96 Jt</div></div>
+          <div class="stat"><div class="l">ROI</div><div class="v amber">3,12x</div></div>
+          <div class="stat"><div class="l">Pesanan SKU</div><div class="v navy">151</div></div>
+        </div>
+      </div>
+      <div class="sview"><img src="" data-imgkey="tiktok_gmvmax" alt="TikTok GMV Max ads dashboard" style="width:100%;border-radius:16px;border:1px solid var(--line);box-shadow:0 12px 34px rgba(30,39,97,.1);cursor:zoom-in" onclick="openImgLB('tiktok_gmvmax','HanSoul Indonesia GMV Max &middot; 01&ndash;17 September 2026')"></div>
+    </div></div>
+    <div class="inner" style="margin-top:26px">
+      <div class="gapnote" style="text-align:center">Basis Ads Manager per-produk: <b>Magnetic Ceramic 1,2L</b> ROI tertinggi (9,44x, spend Rp 515rb) &middot; <b>Gradient Ceramic 750ml</b> ROI 11,36x (spend kecil, Rp 192rb) &middot; <b>Mini Cup Tumbler 200ml</b> spend terbesar (Rp 4,37 Jt) tapi ROI paling rendah dari produk yang closing (2,03x).</div>
+    </div>
+  </section>
+
+  <!-- p18 TikTok GMV Max breakdown ROI per produk -->
+  <section class="panel" id="p18">
+    <div class="inner">
+      <div class="mhead"><div class="k">18 &middot; TIKTOK ADS &mdash; BREAKDOWN ROI</div><div class="t">GMV Max — ROI per Produk</div></div>
+      <div class="sdesc" style="max-width:1100px;margin:0 auto 20px;text-align:center">8 produk closing dari total spend Rp 7,35 Jt, 1&ndash;17 Sept 2026.<br><br>Diurutkan dari ROI tertinggi &mdash; produk dengan spend paling besar belum tentu ROI-nya paling bagus.</div>
+      <div style="overflow-x:auto;max-width:1300px;margin:0 auto">
+      <table style="width:100%;border-collapse:collapse;font-size:15px">
+        <thead><tr style="border-bottom:2px solid var(--navy)">
+          <th style="text-align:left;padding:10px 12px;color:var(--gray);font-size:13px;text-transform:uppercase">Produk</th>
+          <th style="text-align:right;padding:10px 12px;color:var(--gray);font-size:13px;text-transform:uppercase">Biaya</th>
+          <th style="text-align:right;padding:10px 12px;color:var(--gray);font-size:13px;text-transform:uppercase">Pesanan</th>
+          <th style="text-align:right;padding:10px 12px;color:var(--gray);font-size:13px;text-transform:uppercase">Pendapatan Kotor</th>
+          <th style="text-align:right;padding:10px 12px;color:var(--gray);font-size:13px;text-transform:uppercase">ROI</th>
+        </tr></thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--line);background:rgba(30,158,90,.05)"><td style="padding:10px 12px;font-weight:700">Gradient Ceramic 750ml</td><td style="padding:10px 12px;text-align:right">Rp 191.911</td><td style="padding:10px 12px;text-align:right">8</td><td style="padding:10px 12px;text-align:right">Rp 2,18 Jt</td><td style="padding:10px 12px;text-align:right;font-weight:900;color:var(--green)">11,36x</td></tr>
+          <tr style="border-bottom:1px solid var(--line);background:rgba(30,158,90,.05)"><td style="padding:10px 12px;font-weight:700">Magnetic Ceramic 1,2L</td><td style="padding:10px 12px;text-align:right">Rp 515.247</td><td style="padding:10px 12px;text-align:right">16</td><td style="padding:10px 12px;text-align:right">Rp 4,86 Jt</td><td style="padding:10px 12px;text-align:right;font-weight:900;color:var(--green)">9,44x</td></tr>
+          <tr style="border-bottom:1px solid var(--line)"><td style="padding:10px 12px;font-weight:700">Gradient Ceramic 1,2L</td><td style="padding:10px 12px;text-align:right">Rp 379.283</td><td style="padding:10px 12px;text-align:right">7</td><td style="padding:10px 12px;text-align:right">Rp 2,18 Jt</td><td style="padding:10px 12px;text-align:right;font-weight:900;color:var(--amber)">5,75x</td></tr>
+          <tr style="border-bottom:1px solid var(--line)"><td style="padding:10px 12px;font-weight:700">Food Container</td><td style="padding:10px 12px;text-align:right">Rp 187.920</td><td style="padding:10px 12px;text-align:right">6</td><td style="padding:10px 12px;text-align:right">Rp 929rb</td><td style="padding:10px 12px;text-align:right;font-weight:900;color:var(--amber)">4,94x</td></tr>
+          <tr style="border-bottom:1px solid var(--line)"><td style="padding:10px 12px;font-weight:700">Mini Travel Tumbler 230ml</td><td style="padding:10px 12px;text-align:right">Rp 1,07 Jt</td><td style="padding:10px 12px;text-align:right">31</td><td style="padding:10px 12px;text-align:right">Rp 3,67 Jt</td><td style="padding:10px 12px;text-align:right;font-weight:900;color:var(--amber)">3,44x</td></tr>
+          <tr style="border-bottom:1px solid var(--line)"><td style="padding:10px 12px;font-weight:700">Coffee Mug Ceramic 420ml</td><td style="padding:10px 12px;text-align:right">Rp 82.350</td><td style="padding:10px 12px;text-align:right">1</td><td style="padding:10px 12px;text-align:right">Rp 221rb</td><td style="padding:10px 12px;text-align:right;font-weight:900;color:var(--amber)">2,69x</td></tr>
+          <tr style="border-bottom:1px solid var(--line);background:rgba(233,30,99,.04)"><td style="padding:10px 12px;font-weight:700">Mini Cup Tumbler 200ml</td><td style="padding:10px 12px;text-align:right;font-weight:700">Rp 4,37 Jt</td><td style="padding:10px 12px;text-align:right">81</td><td style="padding:10px 12px;text-align:right">Rp 8,85 Jt</td><td style="padding:10px 12px;text-align:right;font-weight:900;color:var(--pink)">2,03x</td></tr>
+          <tr><td style="padding:10px 12px;font-weight:700">Glee Series Bottle 680ml</td><td style="padding:10px 12px;text-align:right">Rp 37.889</td><td style="padding:10px 12px;text-align:right">1</td><td style="padding:10px 12px;text-align:right">Rp 76rb</td><td style="padding:10px 12px;text-align:right;font-weight:900;color:var(--pink)">2,00x</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="hl" style="max-width:1100px;margin:22px auto 0">
+        <b>Yang kelihatan dari breakdown ini:</b>
+        <ul style="margin:12px 0 0;padding-left:22px;display:grid;gap:10px">
+          <li><b>Mini Cup Tumbler 200ml</b> serap 59,4% dari total budget (Rp 4,37 Jt dari Rp 7,35 Jt), tapi ROI-nya paling rendah dari produk yang closing (2,03x) &mdash; volume order-nya tetap terbesar (81), jadi bukan berarti nggak jalan, cuma efisiensinya paling tipis.</li>
+          <li><b>Gradient Ceramic 750ml</b> (11,36x) dan <b>Magnetic Ceramic 1,2L</b> (9,44x) ROI-nya paling tinggi, tapi budgetnya masih kecil (gabungan cuma Rp 707rb, 9,6% dari total spend) &mdash; kandidat kuat buat dinaikin.</li>
+          <li>19 SKU lain (kebanyakan produk bayi &amp; item non-tumbler inti) dapet total Rp 519rb spend (7,1% dari total) tapi 0 pesanan di periode ini &mdash; porsinya kecil, jadi belum jadi prioritas buat dievaluasi ulang.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- p19 TikTok SKU terlaris -->
+  <section class="panel" id="p19">
+    <div class="inner"><div class="split">
+      <div class="sinfo"><div class="snum">19</div><div class="stitle">Produk Terlaris — TikTok</div>
+        <div class="sdesc"><b>Mini Cup Tumbler 200ml</b> mendominasi di TikTok (Blue + Yellow = Rp 7,52 Jt, 35% dari total GMV SKU).<br><br>Ini beda arah sama Shopee, yang jagoannya <b>Magnetic Ceramic Series</b> &mdash; nunjukin selera/format konten di 2 platform ini beda.<div class="hint">Hover bar buat GMV per SKU</div></div></div>
+      <div class="sview"><div class="chart"><svg id="svgTiktokSku" viewBox="0 0 660 300" preserveAspectRatio="xMidYMid meet" style="width:100%;height:auto;display:block"></svg></div></div>
+    </div></div>
+  </section>
+
+  <!-- p20 ringkasan gabungan -->
+  <section class="panel" id="p20">
+    <div class="inner">
+      <div class="mhead"><div class="k">20 &middot; RINGKASAN GABUNGAN</div><div class="t">Shopee Tetap Utama, TikTok Tumbuh Cepat</div></div>
+      <div class="mixwrap" style="max-width:1200px;margin:0 auto 26px">
+        <div class="donut">
+          <svg viewBox="0 0 200 200" id="svgGabungan"></svg>
+          <div class="dc"><div class="l" id="gabLab">GMV Gabungan</div><div class="v" id="gabVal" style="color:#1E2761">Rp 101,49 Jt</div></div>
+        </div>
+        <div class="leg" id="gabLeg"></div>
+      </div>
+      <div style="text-align:center;margin:-14px 0 24px"><div class="hint">Klik segmen donut atau nama platform buat lihat detail %</div></div>
+      <div class="mgrid" style="grid-template-columns:repeat(2,1fr);max-width:900px;margin:0 auto 30px">
+        <div class="mcard"><div class="l">GMV Shopee (Dibayar)</div><div class="v" style="color:#EE4D2D">Rp 80,25 Jt</div><div class="s">402 pesanan &middot; 79,1% dari GMV gabungan</div></div>
+        <div class="mcard"><div class="l">GMV TikTok Shop</div><div class="v" style="color:#111111">Rp 21,24 Jt</div><div class="s">141 pesanan &middot; 20,9% dari GMV gabungan &middot; ▲ +54,68%</div></div>
+      </div>
+      <div class="hl" style="max-width:1100px;margin:0 auto">
+        <b>Yang perlu diperhatikan ke depan:</b>
+        <ul style="margin:12px 0 0;padding-left:22px;display:grid;gap:10px">
+          <li>GMV gabungan periode ini <b>Rp 101,49 Jt</b> &mdash; Shopee masih jadi tulang punggung, tapi TikTok tumbuh %-nya lebih cepat di hampir semua metrik.</li>
+          <li>Mix produk beda di tiap platform: Shopee dimenangin Magnetic Ceramic (harga lebih tinggi), TikTok dimenangin Mini Cup Tumbler (harga lebih terjangkau, AOV lebih rendah).</li>
+          <li>Affiliate TikTok belum ada yang sebesar winning affiliate Shopee &mdash; ada ruang buat scaling creator seeding di TikTok.</li>
+          <li>GMV Max ads TikTok ROI 3,12x masih sehat, dan ada beberapa produk ROI tinggi (9&ndash;11x) yang budgetnya masih kecil &mdash; kandidat buat dinaikin.</li>
+        </ul>
+      </div>
+      <div class="gapnote" style="text-align:center;margin-top:16px">Sumber data TikTok: TikTok Seller Center (Analitik Toko, Analitik LIVE &amp; Video, GMV Max Ads), 1&ndash;17 September 2026.</div>
+    </div>
+  </section>
+
+
+</div>
+
+<div class="dots" id="dots"></div>
+
+<!-- image lightbox (zoom + pan) -->
+<div class="imglb" id="imglb" onclick="if(event.target===this)closeImgLB()">
+  <div class="imglbhint">Klik gambar utk zoom &middot; scroll utk zoom &middot; drag utk geser</div>
+  <button class="imglbclose" onclick="closeImgLB()">&times;</button>
+  <div class="imglbstage" id="imglbstage">
+    <img id="imglbimg" src="" alt="">
+  </div>
+  <div class="imglbtools">
+    <button onclick="imglbZoom(-1)">&minus;</button>
+    <button onclick="imglbReset()" style="font-size:13px">Reset</button>
+    <button onclick="imglbZoom(1)">+</button>
+  </div>
+  <div class="imglbcap" id="imglbcap"></div>
+</div>
+
+<!-- video lightbox (actual playable video, compressed) -->
+<div class="imglb" id="vidlb" onclick="if(event.target===this)closeVidLB()">
+  <button class="imglbclose" onclick="closeVidLB()">&times;</button>
+  <div style="max-width:420px;width:90vw">
+    <video id="vidlbvid" controls playsinline style="width:100%;border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.5);background:#000"></video>
+  </div>
+  <div class="imglbcap">11SEP_VID_RT_L3_BauNempel &middot; ROAS 7,89x &middot; winning ad Meta CPAS</div>
+</div>
+
+<!-- google drive iframe lightbox (winning affiliate videos) — sibling overlay, never nested -->
+<div class="imglb" id="drivelb" onclick="if(event.target===this)closeDriveLB()">
+  <button class="imglbclose" onclick="closeDriveLB()">&times;</button>
+  <div class="lbbox" style="position:relative;width:min(92vw,420px);aspect-ratio:9/16;max-height:82vh;background:#000;border-radius:16px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5)">
+    <iframe id="driveframe" src="" style="width:100%;height:100%;border:0" allow="autoplay"></iframe>
+  </div>
+  <div class="imglbcap" id="drivecap"></div>
+</div>
+
+<script>
+var IMG={};
+var VID_BAUNEMPEL="";
+// NOTE: images/video stripped for project-storage size limit.
+// Full version: Artifact https://claude.ai/artifact/M9BpNb9zSkMDBAmcCXXbHp (V10)
+// and the file delivered to chat (HanSoul_Shopee_MetaCPAS_Sept1-17_2026.html)
+</script>
+<script>
+var NS='http://www.w3.org/2000/svg';
+var tip=document.createElement('div');tip.className='tip';document.body.appendChild(tip);
+function showTip(e,html){tip.innerHTML=html;tip.style.left=e.clientX+'px';tip.style.top=(e.clientY-10)+'px';tip.style.opacity=1;}
+function hideTip(){tip.style.opacity=0;}
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function fmtJt(v){return 'Rp '+v.toFixed(2).replace('.',',')+' Jt';}
+var deck=document.getElementById('deck');
+function whenVisible(id,fn){var elm=document.getElementById(id);if(!elm)return;var o=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){fn();}})},{root:deck,threshold:.2});o.observe(elm);}
+
+// wire up all data-imgkey images from IMG map
+document.querySelectorAll('img[data-imgkey]').forEach(function(im){var k=im.getAttribute('data-imgkey');if(window.IMG&&IMG[k])im.src=IMG[k];});
+
+// nav dots
+(function(){
+  var panels=document.querySelectorAll('.panel');var dotsEl=document.getElementById('dots');var dots=[];
+  panels.forEach(function(p,i){var b=document.createElement('button');b.className='dot'+(i===0?' on':'');b.title=p.id;
+    b.addEventListener('click',function(){p.scrollIntoView({behavior:'auto'});});dotsEl.appendChild(b);dots.push(b);});
+  var ob=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){var idx=[].indexOf.call(panels,x.target);dots.forEach(function(d,i){d.classList.toggle('on',i===idx);});}})},{root:deck,threshold:.55});
+  panels.forEach(function(p){ob.observe(p);});
+})();
+
+// horizontal bars helper w/ replay
+function hbars(svgId,items,W,H,mx,fmt,pad,rpad,lfont){
+  var svg=document.getElementById(svgId);if(!svg)return;svg.innerHTML='';pad=pad||190;rpad=rpad||110;lfont=lfont||18;var n=items.length,gap=14,bh=(H-(n-1)*gap)/n,xmax=W-pad-rpad;var rs=[];
+  items.forEach(function(it,i){var yy=i*(bh+gap);
+    svg.appendChild(el('rect',{x:pad,y:yy,width:xmax,height:bh,rx:7,fill:'#EEF1F6'}));
+    var r=el('rect',{x:pad,y:yy,width:0,height:bh,rx:7,fill:it.color||'#1E2761',class:'bar'});svg.appendChild(r);rs.push([r,xmax*(Math.min(it.val,mx)/mx)]);
+    var lab=el('text',{x:0,y:yy+bh/2+6,'font-size':lfont,'font-weight':'700',fill:'#1E2761'});lab.textContent=it.label;svg.appendChild(lab);
+    var v=el('text',{x:W,y:yy+bh/2+6,'text-anchor':'end','font-size':'16','font-weight':'800',fill:it.color||'#1E2761'});v.textContent=fmt(it);svg.appendChild(v);
+    if(it.tip){r.addEventListener('mousemove',function(e){showTip(e,it.tip);});r.addEventListener('mouseleave',hideTip);}
+  });
+  whenVisible(svgId,function(){
+    rs.forEach(function(a){a[0].style.transition='none';a[0].setAttribute('width',0);void a[0].getBoundingClientRect();});
+    rs.forEach(function(a,i){setTimeout(function(){a[0].style.transition='width .7s cubic-bezier(.22,1,.36,1)';a[0].setAttribute('width',a[1]);},i*70);});
+  });
+}
+
+// vertical bars helper w/ replay (for daily trend)
+function vbars(svgId,items,W,H,mx,pad){
+  var svg=document.getElementById(svgId);if(!svg)return;svg.innerHTML='';pad=pad||{t:20,b:44,l:46,r:10};
+  var n=items.length,plotW=W-pad.l-pad.r,plotH=H-pad.t-pad.b,gap=6,bw=(plotW-(n-1)*gap)/n;
+  // gridlines
+  [0,0.25,0.5,0.75,1].forEach(function(f){var yy=pad.t+plotH*(1-f);svg.appendChild(el('line',{x1:pad.l,x2:W-pad.r,y1:yy,y2:yy,stroke:'#E5E7EB','stroke-width':1}));
+    var t=el('text',{x:pad.l-8,y:yy+4,'text-anchor':'end','font-size':11,fill:'#9AA3B2'});t.textContent=(mx*f).toFixed(0);svg.appendChild(t);});
+  var rs=[];
+  items.forEach(function(it,i){var xx=pad.l+i*(bw+gap);var h=plotH*(Math.min(it.val,mx)/mx);var yy=pad.t+plotH-h;
+    svg.appendChild(el('rect',{x:xx,y:pad.t,width:bw,height:plotH,fill:'transparent'}));
+    var r=el('rect',{x:xx,y:pad.t+plotH,width:bw,height:0,rx:4,fill:it.color||'#1E2761',class:'bar'});svg.appendChild(r);rs.push([r,yy,h]);
+    var lab=el('text',{x:xx+bw/2,y:H-14,'text-anchor':'middle','font-size':11,'font-weight':700,fill:'#6B7280'});lab.textContent=it.label;svg.appendChild(lab);
+    r.addEventListener('mousemove',function(e){showTip(e,it.tip);});r.addEventListener('mouseleave',hideTip);
+  });
+  whenVisible(svgId,function(){
+    rs.forEach(function(a){a[0].style.transition='none';a[0].setAttribute('y',pad.t+plotH);a[0].setAttribute('height',0);void a[0].getBoundingClientRect();});
+    rs.forEach(function(a,i){setTimeout(function(){a[0].style.transition='y .6s cubic-bezier(.22,1,.36,1),height .6s cubic-bezier(.22,1,.36,1)';a[0].setAttribute('y',a[1]);a[0].setAttribute('height',a[2]);},i*35);});
+  });
+}
+
+// p2 — pace harian (1–17 Sept)
+vbars('svgPaceDaily',[
+  {label:'1',val:3.97,color:'#1E2761',tip:'01 Sept · Rp 3,97 Jt'},
+  {label:'2',val:3.47,color:'#1E2761',tip:'02 Sept · Rp 3,47 Jt'},
+  {label:'3',val:4.38,color:'#1E2761',tip:'03 Sept · Rp 4,38 Jt'},
+  {label:'4',val:4.29,color:'#1E2761',tip:'04 Sept · Rp 4,29 Jt'},
+  {label:'5',val:7.41,color:'#1E2761',tip:'05 Sept · Rp 7,41 Jt'},
+  {label:'6',val:4.08,color:'#1E2761',tip:'06 Sept · Rp 4,08 Jt'},
+  {label:'7',val:6.70,color:'#1E2761',tip:'07 Sept · Rp 6,70 Jt'},
+  {label:'8',val:5.81,color:'#1E2761',tip:'08 Sept · Rp 5,81 Jt'},
+  {label:'9',val:11.43,color:'#E91E63',tip:'09 Sept · Rp 11,43 Jt · titik tertinggi bulan ini'},
+  {label:'10',val:3.35,color:'#2F6FC4',tip:'10 Sept · Rp 3,35 Jt'},
+  {label:'11',val:3.59,color:'#2F6FC4',tip:'11 Sept · Rp 3,59 Jt'},
+  {label:'12',val:3.79,color:'#2F6FC4',tip:'12 Sept · Rp 3,79 Jt'},
+  {label:'13',val:3.45,color:'#2F6FC4',tip:'13 Sept · Rp 3,45 Jt'},
+  {label:'14',val:4.21,color:'#2F6FC4',tip:'14 Sept · Rp 4,21 Jt'},
+  {label:'15',val:4.14,color:'#E0A92C',tip:'15 Sept · Rp 4,14 Jt'},
+  {label:'16',val:3.45,color:'#E0A92C',tip:'16 Sept · Rp 3,45 Jt'},
+  {label:'17',val:2.71,color:'#E0A92C',tip:'17 Sept · Rp 2,71 Jt'}
+],680,300,12,{t:20,b:36,l:40,r:10});
+
+// p3 — gap to target
+hbars('svgGap',[
+  {label:'Pace sekarang',val:3.59,color:'#E0A92C',tip:'Pace 10–17 Sept · Rp 3,59 Jt/hari'},
+  {label:'Butuh utk Rp 150 Jt',val:5.37,color:'#2F6FC4',tip:'Butuh Rp 5,37 Jt/hari · 1,50x pace sekarang · 13 hari tersisa'},
+  {label:'Butuh utk Rp 200 Jt',val:9.21,color:'#1E9E5A',tip:'Butuh Rp 9,21 Jt/hari · 2,57x pace sekarang · 13 hari tersisa'}
+],660,140,10,function(it){return fmtJt(it.val)+'/hr';},220,60,16);
+
+// p5 — sumber penjualan (touch, overlap)
+hbars('svgSumber',[
+  {label:'Iklan Shopee',val:65.21,color:'#1E2761',tip:'Iklan Shopee (basis dibayar/touch) · Rp 65,21 Jt'},
+  {label:'Halaman Produk',val:54.67,color:'#0E9E88',tip:'Halaman Produk (organik) · Rp 54,67 Jt'},
+  {label:'Affiliate',val:17.21,color:'#2F6FC4',tip:'Affiliate (live+video+kartu) · Rp 17,21 Jt'},
+  {label:'Live Penjual',val:5.02,color:'#E0A92C',tip:'Live Penjual · Rp 5,02 Jt · 2 dari 5 sesi judul masih "HANSOUL 8.8"'},
+  {label:'Video Penjual',val:3.35,color:'#E91E63',tip:'Video Penjual · Rp 3,35 Jt · masih ada video "payday 25 Mei" yg basi'}
+],660,240,70,function(it){return fmtJt(it.val);},210,70,16);
+
+// p8 — SKU gap dibuat vs dibayar (paired bars)
+(function(){
+  var svg=document.getElementById('svgSkuGap');if(!svg)return;
+  var D=[
+    {name:'Magnetic Ceramic',dibuat:28.35,dibayar:24.54,gap:'13,4%'},
+    {name:'Gradient 1,2L',dibuat:19.36,dibayar:13.48,gap:'30,4%'},
+    {name:'Mini Travel',dibuat:15.16,dibayar:12.86,gap:'15,2%'},
+    {name:'Mini Cup 200ml',dibuat:8.08,dibayar:6.97,gap:'13,8%'},
+    {name:'Gradient 750ml',dibuat:6.07,dibayar:5.60,gap:'7,8%'}
+  ];
+  var W=660,H=280,pad=150,rpad=70,mx=30,n=D.length,gap=18,groupH=(H-(n-1)*gap)/n,barH=groupH/2-3,xmax=W-pad-rpad;
+  var rs=[];
+  D.forEach(function(it,i){var yy=i*(groupH+gap);
+    var lab=el('text',{x:0,y:yy+groupH/2+6,'font-size':16,'font-weight':700,fill:'#1E2761'});lab.textContent=it.name;svg.appendChild(lab);
+    svg.appendChild(el('rect',{x:pad,y:yy,width:xmax,height:barH,rx:6,fill:'#EEF1F6'}));
+    var r1=el('rect',{x:pad,y:yy,width:0,height:barH,rx:6,fill:'#B9C2DE',class:'bar'});svg.appendChild(r1);rs.push([r1,xmax*(it.dibuat/mx)]);
+    var v1=el('text',{x:pad+xmax*(it.dibuat/mx)+8,y:yy+barH/2+5,'font-size':12,'font-weight':700,fill:'#6B7280'});v1.textContent='dibuat '+it.dibuat.toFixed(2).replace('.',',');svg.appendChild(v1);
+    var yy2=yy+barH+6;
+    svg.appendChild(el('rect',{x:pad,y:yy2,width:xmax,height:barH,rx:6,fill:'#EEF1F6'}));
+    var color=it.gap==='30,4%'?'#E91E63':'#1E2761';
+    var r2=el('rect',{x:pad,y:yy2,width:0,height:barH,rx:6,fill:color,class:'bar'});svg.appendChild(r2);rs.push([r2,xmax*(it.dibayar/mx)]);
+    var v2=el('text',{x:pad+xmax*(it.dibayar/mx)+8,y:yy2+barH/2+5,'font-size':12,'font-weight':800,fill:color});v2.textContent='dibayar '+it.dibayar.toFixed(2).replace('.',',')+' (gap '+it.gap+')';svg.appendChild(v2);
+    [r1,r2].forEach(function(r){r.addEventListener('mousemove',function(e){showTip(e,'<b>'+it.name+'</b><br>Dibuat: Rp '+it.dibuat.toFixed(2).replace('.',',')+' Jt<br>Dibayar: Rp '+it.dibayar.toFixed(2).replace('.',',')+' Jt<br>Gap: '+it.gap);});r.addEventListener('mouseleave',hideTip);});
+  });
+  whenVisible('svgSkuGap',function(){
+    rs.forEach(function(a){a[0].style.transition='none';a[0].setAttribute('width',0);void a[0].getBoundingClientRect();});
+    rs.forEach(function(a,i){setTimeout(function(){a[0].style.transition='width .7s cubic-bezier(.22,1,.36,1)';a[0].setAttribute('width',a[1]);},i*60);});
+  });
+})();
+
+// SKU explorer (p7)
+var COL={green:'#2E8B6B',ivory:'#E3DCC2',black:'#1C1C1C',pink:'#E8548C',brown:'#8A5A3B',white:'#DDE0E6',blue:'#2F6FC4',yellow:'#E0A92C',red:'#C0322E',purple:'#7E57C2'};
+function makeSKU(listId,detailId,SKUS,maxG){
+  var list=document.getElementById(listId);if(!list)return;list.innerHTML='';
+  SKUS.forEach(function(s,i){var d=document.createElement('div');d.className='sku'+(i===0?' sel':'');
+    d.innerHTML='<div class="nm">'+s.name+'</div><div class="track"><div class="fill" data-w="'+(s.gmv/maxG*100)+'"></div></div><div class="g">'+s.disp+'</div>';
+    d.addEventListener('click',function(){list.querySelectorAll('.sku').forEach(function(x){x.classList.remove('sel')});d.classList.add('sel');render(s);});list.appendChild(d);});
+  function render(s){var det=document.getElementById(detailId);var st='<div class="stack">';s.colors.forEach(function(c){st+='<div style="width:'+c[1]+'%;background:'+COL[c[2]]+'"></div>';});st+='</div>';
+    var ch='<div class="chips">';s.colors.forEach(function(c){ch+='<div class="chip"><span class="sw" style="background:'+COL[c[2]]+'"></span>'+c[0]+' <b style="margin-left:2px">'+c[1]+'%</b></div>';});ch+='</div>';
+    det.innerHTML='<div style="font-size:18px;font-weight:800;margin-bottom:2px">'+s.name+' · '+s.disp+'</div><div style="font-size:14px;color:#6B7280;margin-bottom:6px">Breakdown per warna/varian (% dari omset SKU, basis dibayar) — klik SKU lain buat ganti</div>'+st+ch;}
+  render(SKUS[0]);
+  whenVisible(listId,function(){var fills=list.querySelectorAll('.fill');fills.forEach(function(f){f.style.transition='none';f.style.width='0%';});setTimeout(function(){fills.forEach(function(f){f.style.transition='';f.style.width=f.dataset.w+'%';});},40);});
+}
+makeSKU('skuList','skuDetail',[
+ {name:'Magnetic Ceramic 900/1.2L',gmv:24.54,disp:'Rp 24,54 Jt',colors:[['Black 1.2L',28,'black'],['Ivory 1.2L',23,'ivory'],['Ivory 900',15,'ivory'],['Green 1.2L',13,'green'],['Green 900',11,'green'],['Black 900',10,'black']]},
+ {name:'Gradient Ceramic 1.2L',gmv:13.48,disp:'Rp 13,48 Jt',colors:[['Pink',53,'pink'],['Green',30,'green'],['Brown',17,'brown']]},
+ {name:'Mini Travel Tumbler',gmv:12.86,disp:'Rp 12,86 Jt',colors:[['Green',50,'green'],['Red',40,'red'],['White',10,'white']]},
+ {name:'Mini Cup 200ml',gmv:6.97,disp:'Rp 6,97 Jt',colors:[['Blue',68,'blue'],['Yellow',18,'yellow'],['Red',14,'red']]},
+ {name:'Gradient Ceramic 750ml',gmv:5.60,disp:'Rp 5,60 Jt',colors:[['Green',48,'green'],['Brown',36,'brown'],['Ivory',16,'ivory']]},
+ {name:'One Touch Bottle 850ml',gmv:3.12,disp:'Rp 3,12 Jt',colors:[['Brown',36,'brown'],['Black',25,'black'],['Blue',25,'blue'],['Purple',15,'purple']]}
+],24.54);
+
+// donut helper
+function makeDonut(svgId,labId,valId,legId,segs,defLab,defVal){
+  var svg=document.getElementById(svgId);if(!svg)return;svg.innerHTML='';svg.setAttribute('viewBox','0 0 200 200');svg.style.transform='rotate(-90deg)';
+  var CIRC=502.655,off=0,mixLab=document.getElementById(labId),mixVal=document.getElementById(valId),leg=document.getElementById(legId);if(leg)leg.innerHTML='';
+  svg.appendChild(el('circle',{cx:100,cy:100,r:80,fill:'none',stroke:'#EEF1F6','stroke-width':30}));var circles=[];
+  segs.forEach(function(s,i){var len=s.p/100*CIRC;var c=el('circle',{cx:100,cy:100,r:80,fill:'none',stroke:s.c,'stroke-width':30,'stroke-dasharray':'0 '+CIRC,'stroke-dashoffset':-off,class:'dseg'});c.style.transition='stroke-dasharray 1s cubic-bezier(.22,1,.36,1)';svg.appendChild(c);circles.push([c,len]);
+    (function(seg,circle){function f(){if(mixLab)mixLab.textContent=seg.n;if(mixVal){var pct=seg.p.toFixed(1).replace('.',',')+'%';mixVal.innerHTML=seg.v?(pct+'<br><span style="font-size:15px;font-weight:700">'+seg.v+'</span>'):pct;mixVal.style.color=seg.c==='#E5E7EB'?'#6B7280':seg.c;}circle.style.strokeWidth=34;}
+     function r(){if(mixLab)mixLab.textContent=defLab;if(mixVal){mixVal.innerHTML=defVal;mixVal.style.color='#1E2761';}circle.style.strokeWidth=30;}
+     circle.addEventListener('mouseenter',f);circle.addEventListener('mouseleave',r);
+     if(leg){var l=document.createElement('div');l.className='lg';l.innerHTML='<span class="sw" style="background:'+seg.c+'"></span>'+seg.n+(seg.v?' <span style="color:var(--gray);font-weight:600;font-size:14px">('+seg.v+')</span>':'')+'<span class="p">'+seg.p.toFixed(1).replace('.',',')+'%</span>';l.addEventListener('mouseenter',f);l.addEventListener('mouseleave',r);leg.appendChild(l);}
+    })(s,c);off+=len;});
+  whenVisible(svgId,function(){circles.forEach(function(a){a[0].style.transition='none';a[0].setAttribute('stroke-dasharray','0 '+CIRC);});circles.forEach(function(a,i){setTimeout(function(){a[0].style.transition='stroke-dasharray 1s cubic-bezier(.22,1,.36,1)';a[0].setAttribute('stroke-dasharray',a[1].toFixed(1)+' '+CIRC);},i*90+40);});});
+}
+makeDonut('svgAffMix','affLab','affVal','affLeg',[
+  {n:'Shopee Video',p:39.4,c:'#1E2761'},
+  {n:'Lainnya',p:29.7,c:'#B9C2DE'},
+  {n:'Instagram',p:14.3,c:'#0E9E88'},
+  {n:'Facebook',p:12.0,c:'#E0A92C'},
+  {n:'Shopee Live',p:1.7,c:'#E5E7EB'},
+  {n:'Tiktok',p:2.9,c:'#2F6FC4'}
+],'Top Platform','39,4%');
+
+// p14 — TikTok pace GMV video harian (1–16 Sept)
+vbars('svgTiktokPace',[
+  {label:'1',val:0.630,color:'#1E2761',tip:'01 Sept · Rp 629.837'},
+  {label:'2',val:0.572,color:'#1E2761',tip:'02 Sept · Rp 571.642'},
+  {label:'3',val:0.663,color:'#1E2761',tip:'03 Sept · Rp 662.919'},
+  {label:'4',val:0.373,color:'#1E2761',tip:'04 Sept · Rp 372.820'},
+  {label:'5',val:0.122,color:'#1E2761',tip:'05 Sept · Rp 121.736'},
+  {label:'6',val:0.112,color:'#1E2761',tip:'06 Sept · Rp 111.740'},
+  {label:'7',val:0.518,color:'#1E2761',tip:'07 Sept · Rp 518.125'},
+  {label:'8',val:0.938,color:'#1E2761',tip:'08 Sept · Rp 937.725'},
+  {label:'9',val:0.900,color:'#1E2761',tip:'09 Sept · Rp 899.631'},
+  {label:'10',val:0.554,color:'#2F6FC4',tip:'10 Sept · Rp 554.357 · mulai akselerasi'},
+  {label:'11',val:0.610,color:'#2F6FC4',tip:'11 Sept · Rp 609.938'},
+  {label:'12',val:1.584,color:'#2F6FC4',tip:'12 Sept · Rp 1.584.140'},
+  {label:'13',val:1.184,color:'#2F6FC4',tip:'13 Sept · Rp 1.183.658'},
+  {label:'14',val:1.840,color:'#E91E63',tip:'14 Sept · Rp 1.839.973 · titik tertinggi'},
+  {label:'15',val:1.485,color:'#2F6FC4',tip:'15 Sept · Rp 1.484.799'},
+  {label:'16',val:1.120,color:'#2F6FC4',tip:'16 Sept · Rp 1.120.210'}
+],680,300,2,{t:20,b:36,l:40,r:10});
+
+// p15 — TikTok sumber GMV (afiliasi vs penjual, per channel)
+makeDonut('svgTiktokSrc','ttSrcLab','ttSrcVal','ttSrcLeg',[
+  {n:'Video Afiliasi',p:64.5,c:'#1E2761'},
+  {n:'Kartu Produk Afiliasi',p:17.2,c:'#2F6FC4'},
+  {n:'Kartu Produk Toko',p:9.5,c:'#0E9E88'},
+  {n:'LIVE Toko',p:6.6,c:'#E0A92C'},
+  {n:'LIVE Afiliasi',p:2.3,c:'#E5E7EB'},
+  {n:'Video Toko',p:0.0,c:'#E91E63'}
+],'Total GMV','Rp 21,24 Jt');
+
+// p20 — ringkasan gabungan (Shopee vs TikTok)
+makeDonut('svgGabungan','gabLab','gabVal','gabLeg',[
+  {n:'Shopee',p:79.1,c:'#EE4D2D',v:'Rp 80,25 Jt'},
+  {n:'TikTok Shop',p:20.9,c:'#111111',v:'Rp 21,24 Jt'}
+],'GMV Gabungan','Rp 101,49 Jt');
+
+// p18 — TikTok SKU terlaris
+hbars('svgTiktokSku',[
+  {label:'Mini Cup 200ml · Blue',val:3.93,color:'#1E2761',tip:'Mini Cup Tumbler 200ml · Blue · Rp 3,93 Jt · 39 pcs'},
+  {label:'Mini Cup 200ml · Yellow',val:3.58,color:'#1E2761',tip:'Mini Cup Tumbler 200ml · Yellow · Rp 3,58 Jt · 35 pcs'},
+  {label:'Magnetic 1,2L · Ivory',val:2.58,color:'#2F6FC4',tip:'Magnetic Ceramic 1,2L · Ivory · Rp 2,58 Jt · 9 pcs'},
+  {label:'Magnetic 1,2L · Green',val:1.45,color:'#2F6FC4',tip:'Magnetic Ceramic 1,2L · Green · Rp 1,45 Jt · 5 pcs'},
+  {label:'Mini Cup 200ml · Red',val:1.33,color:'#1E2761',tip:'Mini Cup Tumbler 200ml · Red · Rp 1,33 Jt · 13 pcs'},
+  {label:'Mini Travel · Green',val:1.29,color:'#0E9E88',tip:'Mini Travel Tumbler 230ml · Green · Rp 1,29 Jt · 12 pcs'}
+],660,260,4,function(it){return fmtJt(it.val);},220,20,15);
+
+// ===== image lightbox (zoom + drag-pan) =====
+var ilb={scale:1,x:0,y:0,dragging:false,moved:0,sx:0,sy:0};
+function openImgLB(key,caption){
+  var box=document.getElementById('imglb'),img=document.getElementById('imglbimg'),cap=document.getElementById('imglbcap');
+  if(window.IMG&&IMG[key])img.src=IMG[key];
+  cap.textContent=caption||'';
+  ilb.scale=1;ilb.x=0;ilb.y=0;applyImgLBTransform();
+  box.classList.add('open');
+}
+function closeImgLB(){document.getElementById('imglb').classList.remove('open');}
+function applyImgLBTransform(){var img=document.getElementById('imglbimg');img.style.transform='translate('+ilb.x+'px,'+ilb.y+'px) scale('+ilb.scale+')';}
+function imglbZoom(dir){ilb.scale=Math.min(2.5,Math.max(1,ilb.scale+dir*0.3));if(ilb.scale===1){ilb.x=0;ilb.y=0;}applyImgLBTransform();}
+function imglbReset(){ilb.scale=1;ilb.x=0;ilb.y=0;applyImgLBTransform();}
+(function(){
+  var stage=document.getElementById('imglbstage'),img=document.getElementById('imglbimg');
+  stage.addEventListener('click',function(e){
+    if(ilb.moved>6)return;
+    if(ilb.scale===1){ilb.scale=1.3;}else{ilb.scale=1;ilb.x=0;ilb.y=0;}
+    applyImgLBTransform();
+  });
+  stage.addEventListener('wheel',function(e){e.preventDefault();var dir=e.deltaY<0?1:-1;ilb.scale=Math.min(2.5,Math.max(1,ilb.scale+dir*0.15));if(ilb.scale===1){ilb.x=0;ilb.y=0;}applyImgLBTransform();},{passive:false});
+  stage.addEventListener('pointerdown',function(e){ilb.dragging=true;ilb.moved=0;ilb.sx=e.clientX-ilb.x;ilb.sy=e.clientY-ilb.y;try{stage.setPointerCapture(e.pointerId);}catch(err){}});
+  stage.addEventListener('pointermove',function(e){if(!ilb.dragging)return;var nx=e.clientX-ilb.sx,ny=e.clientY-ilb.sy;ilb.moved+=Math.abs(nx-ilb.x)+Math.abs(ny-ilb.y);if(ilb.scale>1){ilb.x=nx;ilb.y=ny;applyImgLBTransform();}});
+  stage.addEventListener('pointerup',function(e){ilb.dragging=false;try{stage.releasePointerCapture(e.pointerId);}catch(err){}});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeImgLB();closeVidLB();closeDriveLB();}});
+})();
+
+// video lightbox — actual playable compressed video (VP9/WebM, ~2.4MB)
+function openVidLB(){var box=document.getElementById('vidlb'),vid=document.getElementById('vidlbvid');if(window.VID_BAUNEMPEL){vid.src=VID_BAUNEMPEL;}box.classList.add('open');vid.play().catch(function(){});}
+function closeVidLB(){var vid=document.getElementById('vidlbvid');vid.pause();document.getElementById('vidlb').classList.remove('open');}
+
+// google drive iframe lightbox — embeds the Drive video preview inline in the doc (no navigating away)
+function openDriveLB(fileId,caption){
+  var box=document.getElementById('drivelb'),frame=document.getElementById('driveframe'),cap=document.getElementById('drivecap');
+  frame.src='https://drive.google.com/file/d/'+fileId+'/preview';
+  cap.innerHTML=(caption||'')+' &middot; <a href="https://drive.google.com/file/d/'+fileId+'/view" target="_blank" style="color:#dbe2f7;text-decoration:underline">buka di Google Drive ↗</a>';
+  box.classList.add('open');
+}
+function closeDriveLB(){document.getElementById('driveframe').src='';document.getElementById('drivelb').classList.remove('open');}
+</script>
+</body>
+</html>
